@@ -2,12 +2,35 @@ package edLineales2022_23;
 
 public interface Stack <T> {
 
-    //Lookout how to do JAVADOC
+	/**
+	 * 
+	 * @param T
+	 */
+	default void push(T element) {
+		
+	}
+	default int size() {
+		int size=0;
+		return size;
+	}
 
-    public void push (T element);
-    public T pop ();
-    public T top ();
-    public boolean IsEmpty();
-    public int size();
-    public String toString();
+	default boolean isEmpty() {
+		boolean isEmpty=false;
+		
+		return isEmpty ;
+		
+	}
+
+	 default T pop() {
+		 T pop=null;
+			
+			return pop;
+	 }
+
+	default T top() {
+		T top=null ;
+		
+		return top;
+	}
+
 }
