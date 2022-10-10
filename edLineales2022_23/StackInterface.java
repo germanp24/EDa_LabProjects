@@ -1,6 +1,6 @@
 package edLineales2022_23;
 
-public interface Stack <T> {
+public interface StackInterface <T> {
 
     //Lookout how to do JAVADOC
 
