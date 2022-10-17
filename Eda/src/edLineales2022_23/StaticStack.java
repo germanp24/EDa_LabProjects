@@ -15,12 +15,14 @@ public void push(T element) {
 	
 }
 public T pop() throws StackEmptyException {
+	T element;
 	if(isEmpty()) {
 		throw new StackEmptyException("The stack is empty. Push a value before popping it.");
 	}else{
+	element=this.arr[t];
 		this.arr[t]=null;
 		t--;
-		return this.arr[t];
+		return element;
 	}
 	
 	
