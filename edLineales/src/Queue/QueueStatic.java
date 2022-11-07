@@ -15,7 +15,7 @@ public class QueueStatic<T> implements Queue<T>{
 		sizeControl = 0;
 		cola = (T[]) new Object [size];
 		
-	}
+	}      
 
 	
 	
