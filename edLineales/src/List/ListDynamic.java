@@ -53,7 +53,7 @@ public class ListDynamic<T> implements List<T> {
 
 		if (isEmpty()) {
 
-			throw new EmptyListException("La lista está vacía");
+			throw new EmptyListException("La lista esta vacia");
 		} else {
 
 			Nodo<T> aux = new Nodo(element, null);
