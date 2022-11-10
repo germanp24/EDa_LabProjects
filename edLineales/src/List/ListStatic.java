@@ -98,9 +98,9 @@ public class ListStatic<T> implements List<T> {
 		T element;
 		
 		if(isEmpty()) {
-			throw new EmptyListException("La lista esta vacía");
+			throw new EmptyListException("La lista esta vacia");
 		}else if (n<0 || n>top){
-			throw new RuntimeException("El número introducido es negativo, o es mayor al tamaño de la lista");
+			throw new RuntimeException("El numero introducido es negativo, o es mayor al tamano de la lista");
 		}else {
 			element=list[n];
 			for(int i =n; i<top;i++) {
@@ -120,7 +120,7 @@ public class ListStatic<T> implements List<T> {
 		int pos;
 		boolean exists=false;
 		if (isEmpty()) {
-			throw new EmptyListException("La lista esta vacía");
+			throw new EmptyListException("La lista esta vacia");
 		}else {
 			for (int i=0; i<top;i++) {
 				if (list[i]==element) {
@@ -133,7 +133,7 @@ public class ListStatic<T> implements List<T> {
 			}
 		}
 		if (!exists) {
-			throw new RuntimeException("No existe el elemento en el array");
+			throw new RuntimeException("No existe el elemento en la lista");
 		}
 		return 0;
 		

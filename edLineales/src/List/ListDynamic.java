@@ -73,9 +73,9 @@ public class ListDynamic<T> implements List<T> {
 	public T get(int n) throws EmptyListException {
 
 		if ((n < 0 || n >= size())) {
-			throw new RuntimeException("El número introducido es negativo, o es mayor al tamaño de la lista");
+			throw new RuntimeException("El numero introducido es negativo, o es mayor al tamanoo de la lista");
 		} else if (isEmpty()) {
-			throw new EmptyListException("La lista está vacía");
+			throw new EmptyListException("La lista esta vacia");
 
 		} else {
 
@@ -98,7 +98,7 @@ public class ListDynamic<T> implements List<T> {
 	
 	public void put(T element, int n) {
 		if ((n < 0 || n >= size())) {
-			throw new RuntimeException("El número introducido es negativo, o es mayor al tamaño de la lista");
+			throw new RuntimeException("El numero introducido es negativo, o es mayor al tamano de la lista");
 		} else {
 			if (n == 0) {
 				Nodo<T> aux2 = new Nodo(element, first);
@@ -125,10 +125,10 @@ public class ListDynamic<T> implements List<T> {
 	
 	public void remove(int n) throws EmptyListException {
 		if (isEmpty()) {
-			throw new EmptyListException("La lista está vacía");
+			throw new EmptyListException("La lista esta vacia");
 
 		} else if ((n < 0 || n >= size())) {
-			throw new RuntimeException("El número introducido es negativo, o es mayor al tamaño de la lista");
+			throw new RuntimeException("El numero introducido es negativo, o es mayor al tamano de la lista");
 
 		} else {
 			Nodo<T> aux = new Nodo();

@@ -25,4 +25,7 @@ public class Acciones {
 	public void setnPAcciones(int nPAcciones) {
 		this.nPAcciones = nPAcciones;
 	}
+	public String toString() {
+		return "Numero de Acciones: "+nAcciones +" y Precio por Acciones: "+nPAcciones;
+	}
 }
