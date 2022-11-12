@@ -26,10 +26,7 @@ public class QueueStatic<T> implements Queue<T>{
 		size = 100;
 		sizeControl = 0;
 		cola = (T[]) new Object [size];
-		
 	}      
-
-	
 	
 	public void enqueue(T element) {
 		
@@ -40,7 +37,6 @@ public class QueueStatic<T> implements Queue<T>{
 		sizeControl++;
 		}
 	}  
-
 	
 	public T dequeue() throws EmptyQueueException {
 		
@@ -53,10 +49,8 @@ public class QueueStatic<T> implements Queue<T>{
 			cola[i]=cola[i+1];
 			
 		}
-		
 			cola[sizeControl] = null;
 			sizeControl--;
-		
 		
 		return element;
 		}
@@ -74,7 +68,6 @@ public class QueueStatic<T> implements Queue<T>{
 
 	
 	public boolean isEmpty() {
-		
 		return sizeControl==0;
 	}
 
@@ -82,6 +75,4 @@ public class QueueStatic<T> implements Queue<T>{
 	public int size() {
 		return sizeControl;
 	}
-	
-
 }

@@ -2,6 +2,15 @@ package List;
 
 import List.Comparable;
 
+/**
+ * The "Nodo" class contains the elements with which the lists will work
+ * and allows their implementation in any other class.
+ * @authors: Andrea Ordono, Victor Centellas, David Garcia, German Pajarero
+ * 
+ * @date: November 7, 2022
+ * @version: 1.0
+ */
+
 public class Nodo<T> implements Comparable<T>{
 	private T element;
 	private Nodo<T> next;
@@ -16,7 +25,6 @@ public class Nodo<T> implements Comparable<T>{
 		
 		this.element = element;
 		this.next = next;
-		
 	}
 	
 	public Nodo(T element) {
@@ -24,8 +32,6 @@ public class Nodo<T> implements Comparable<T>{
 		this.element=element;
 	}
 	
-	
-
 	public T getElement() {
 		return element;
 	}
@@ -56,6 +62,3 @@ public class Nodo<T> implements Comparable<T>{
 		return match;
 	}
 }
-	
-	
-

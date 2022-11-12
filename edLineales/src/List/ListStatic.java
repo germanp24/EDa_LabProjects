@@ -2,11 +2,20 @@ package List;
 
 import List.EmptyListException;
 
+/**
+ * The "ListStatic" class will be used to perform the operation of a static list,
+ * it implements the "List" interface, used as a template for this class.
+ * 
+ * In this class the different methods that will make possible its correct
+ * operation will be defined and developed.
+ * @authors: Andrea Ordono, Victor Centellas, David Garcia, German Pajarero
+ * 
+ * @date: November 7, 2022
+ * @version: 1.0
+ */
+
 public class ListStatic<T> implements List<T> {
-	
-	
 	private T [] list;
-	
 	private int top;
 	
 	public ListStatic() {
@@ -14,29 +23,21 @@ public class ListStatic<T> implements List<T> {
 		list = (T[]) new Object [100];
 	}
 	
-	
-
-	
 	public void add(T element) {
 		if(list.length>top) {
-			
 			add(element);
-			
 		}
 			list[top] = element;
 			top++;
 	}
 
-	
 	public boolean isEmpty() {
 		return top == 0;
 	}
-
 	
 	public int size() {
 		return this.top;
 	}
-
 	
 	public boolean exists(T element) throws EmptyListException {
 		boolean igual = false;
@@ -51,11 +52,9 @@ public class ListStatic<T> implements List<T> {
 					igual = true;
 				}
 			}
-			
 		}
 		return igual;
 	}
-
 	
 	public T get(int n) throws EmptyListException {
 		T element;
@@ -67,12 +66,8 @@ public class ListStatic<T> implements List<T> {
 			
 			element = list[n];
 			return element;
-			
 		}
-	
-			
 	}
-
 	
 	public void put(T element, int n) {
 		if(n<0 || n>size()) {
@@ -84,13 +79,9 @@ public class ListStatic<T> implements List<T> {
 			}
 			list[n]=element;
 			top++;
-			
 		}
-		
-		
 	}
 
-	
 	public void remove(int n) throws EmptyListException {
 		T element;
 		
@@ -102,16 +93,11 @@ public class ListStatic<T> implements List<T> {
 			element=list[n];
 			for(int i =n; i<top;i++) {
 				list[i]=list[i+1];
-				
 			}
 			list[top]=null;
 			top--;
-			
-		
 		}
-		
 	}
-
 	
 	public int locate(T element) throws EmptyListException {
 		int pos;
@@ -124,8 +110,6 @@ public class ListStatic<T> implements List<T> {
 					pos = i;
 					exists=true;
 					return pos;
-					
-					
 				}
 			}
 		}
@@ -133,13 +117,5 @@ public class ListStatic<T> implements List<T> {
 			throw new RuntimeException("No existe el elemento en la lista");
 		}
 		return 0;
-		
-		
-		
 	}
-	
-
-	
-	
-	
 }

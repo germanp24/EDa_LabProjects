@@ -1,5 +1,15 @@
 package List;
 
+/**
+ * The "Dictionary" class contains the necessary elements
+ * to be able to add both terms and definitions and
+ * to check different situations.
+ * @authors: Andrea Ordono, Victor Centellas, David Garcia, German Pajarero
+ * 
+ * @date: November 7, 2022
+ * @version: 1.0
+ */
+
 public class Diccionario {
  String Termino;
 String Definicion;
@@ -41,5 +51,4 @@ String Definicion;
 		}
 		return result;
 		}
-	
 }

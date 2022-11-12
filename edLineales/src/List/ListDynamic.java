@@ -3,6 +3,18 @@ package List;
 import List.ElementDoesNotExistException;
 import List.EmptyListException;
 
+/**
+ * The "ListDynamic" class will be used to perform the operation of a dynamic list,
+ * it implements the "List" interface, used as a template for this class.
+ * 
+ * In this class the different methods that will make possible its correct
+ * operation will be defined and developed.
+ * @authors: Andrea Ordono, Victor Centellas, David Garcia, German Pajarero
+ * 
+ * @date: November 7, 2022
+ * @version: 1.0
+ */
+
 public class ListDynamic<T> implements List<T> {
 	private Nodo<T> first;
 	private Nodo<T> last;
@@ -14,7 +26,6 @@ public class ListDynamic<T> implements List<T> {
 		last = null;
 		size = 0;
 	}
-
 	
 	public void add(T element) {
 		Nodo<T> aux = new Nodo(element, null);
@@ -30,24 +41,18 @@ public class ListDynamic<T> implements List<T> {
 				last.setNext(aux);
 			}
 			last = aux;
-
 		}
 		size++;
-		
 	}
-
 	
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return size == 0;
 	}
-
 	
 	public int size() {
-
 		return size;
 	}
-
 	
 	public boolean exists(T element) throws EmptyListException {
 		boolean match = false;
@@ -69,9 +74,7 @@ public class ListDynamic<T> implements List<T> {
 			first=aux1;
 			return match;
 		}
-
 	}
-
 	
 	public T get(int n) throws EmptyListException {
 
@@ -118,13 +121,10 @@ public class ListDynamic<T> implements List<T> {
 				}
 				Nodo<T> aux2 = new Nodo(element, aux);
 				prev.setNext(aux2);
-
 			}
 			size++;
 		}
-
 	}
-
 	
 	public void remove(int n) throws EmptyListException {
 		if (isEmpty()) {
@@ -164,7 +164,6 @@ public class ListDynamic<T> implements List<T> {
 		size--;
 	}
 
-
 	public int locate(T element) throws EmptyListException {
 		int n = 0;
 		T elemento;
@@ -187,7 +186,6 @@ public class ListDynamic<T> implements List<T> {
 						aux = aux.getNext();
 					}
 				}
-
 			}
 			if (match) {
 				return n;
@@ -196,8 +194,5 @@ public class ListDynamic<T> implements List<T> {
 				throw new ElementDoesNotExistException("Este elemento no existe");
 			}
 		}
-
 	}
-
 }
-

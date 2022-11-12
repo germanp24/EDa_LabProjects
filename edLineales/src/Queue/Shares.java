@@ -1,11 +1,8 @@
 package Queue;
 
 /**
- * The "Shares" class will be used to perform the operation of a static queue,
- * it implements the "Queue" interface, used as a template for this class.
- * 
- * In this class the different methods that will make possible its correct
- * operation will be defined and developed.
+ * The "Shares" class will contain the elements related to the shares
+ * that we will handle during the execution of the program.
  * @authors: Andrea Ordono, Victor Centellas, David Garcia, German Pajarero
  * 
  * @date: October 17, 2022
