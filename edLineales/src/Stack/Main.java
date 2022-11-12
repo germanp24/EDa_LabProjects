@@ -9,17 +9,39 @@ package Stack;
  * @version: 1.0
  */
 
+
+
 public class Main {
-    public static void main(String[] args){
-        
-        StackStatic <Integer> pilaEstatica = new StackStatic<Integer>(); //Esto no funciona, hay que ver como generar una pila.
+	public static void main(String[] args) {
 
-        //Aniado 4 valores a la pila estatica.
-        pilaEstatica.push(2);
-        pilaEstatica.push(3);
-        pilaEstatica.push(4);
-        pilaEstatica.push(5);
+		
+		StackStatic<Integer> staticStack = new StackStatic<Integer>();
+		StackDynamic<Integer> dynamicStack = new StackDynamic<Integer>();
+		System.out.println("Pila dinamica: \n" );
+		stack(dynamicStack);
+		System.out.println("Pila estatica: \n" );
+		stack(staticStack);
+		
+		
+	}
+	public static void stack(Stack pila) {
 
-        pilaEstatica.toString();
-    }
+		pila.push(2);
+		pila.push(3);
+
+		System.out.println("El top de la pila es "+ pila.top());
+
+		System.out.println("El tamaño de la pila es "+pila.size());
+		
+		System.out.println("Hemos quitado el elemento " +pila.pop()+" de la pila");
+		System.out.println("Hemos quitado el elemento " +pila.pop()+" de la pila");
+
+		System.out.println("¿La pila esta vacia? :"+pila.isEmpty());
+
+		pila.push(4);
+		pila.push(5);
+		
+		System.out.println("El top de la pila es "+ pila.top());
+		System.out.println("¿La pila esta vacia? :"+pila.isEmpty()+"\n");
+	}
 }

@@ -3,6 +3,18 @@ package Queue;
 import Queue.EmptyQueueException;
 import Queue.Queue;
 
+/**
+ * The "QueueStatic" class will be used to perform the operation of a static queue,
+ * it implements the "Queue" interface, used as a template for this class.
+ * 
+ * In this class the different methods that will make possible its correct
+ * operation will be defined and developed.
+ * @authors: Andrea Ordono, Victor Centellas, David Garcia, German Pajarero
+ * 
+ * @date: October 17, 2022
+ * @version 1.0
+ */
+
 public class QueueStatic<T> implements Queue<T>{
 	
 	private int size;

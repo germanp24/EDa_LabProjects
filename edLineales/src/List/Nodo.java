@@ -21,6 +21,7 @@ public class Nodo<T> implements Comparable<T>{
 	
 	public Nodo(T element) {
 		next=null;
+		this.element=element;
 	}
 	
 	
@@ -46,13 +47,15 @@ public class Nodo<T> implements Comparable<T>{
 	}
 
 	@Override
-	public boolean CompararCon(T element) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean CompareTo(T element) {
+		boolean match=false;
+		
+		if(((Diccionario)this.element).equal((Diccionario)element)) {
+			match=true;
+		}
+		return match;
 	}
-
-	
-	
 }
+	
 	
 

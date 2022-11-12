@@ -1,7 +1,7 @@
 package Stack;
 
 import Stack.EmptyStackException;
-import Stack.Nodo;
+import Stack.Node;
 
 /**
  * The "StackDynamic" class will be used to perform the operation of a dynamic stack,
@@ -17,7 +17,7 @@ import Stack.Nodo;
 
 public class StackDynamic<T> implements Stack<T>{
 	
-	private Nodo<T> top;
+	private Node<T> top;
 	private int size;
 	
 	public StackDynamic() {
@@ -27,7 +27,7 @@ public class StackDynamic<T> implements Stack<T>{
 	
 	public void push(T element) {
 		
-		Nodo<T> aux = new Nodo<>(element, top);
+		Node<T> aux = new Node<>(element, top);
         top = aux;
         this.size++;
 	}
@@ -38,7 +38,7 @@ public class StackDynamic<T> implements Stack<T>{
             throw new EmptyStackException("Esta pila esta vacia");
         } else {
             T element = top.getElement();
-            Nodo<T> aux = top.getNext();
+            Node<T> aux = top.getNext();
             
             top = aux; 
             this.size--;
@@ -62,11 +62,11 @@ public class StackDynamic<T> implements Stack<T>{
 		return top == null;
 	}
 
-	public Nodo<T> getTop() {
+	public Node<T> getTop() {
 		return top;
 	}
 
-	public void setTop(Nodo<T> top) {
+	public void setTop(Node<T> top) {
 		this.top = top;
 	}
 

@@ -19,6 +19,7 @@ public interface List<T> {
 	public void remove (int n) throws EmptyListException;
 	
 	public int locate(T element) throws EmptyListException;
+	
 
 }
 

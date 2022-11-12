@@ -1,6 +1,6 @@
 package Stack;
 
-import Stack.Nodo;
+import Stack.Node;
 
 /**
  * The "Node" class is used to represent the nodes that
@@ -11,12 +11,12 @@ import Stack.Nodo;
  * @version: 1.0
  */
 
-public class Nodo<T>{
+public class Node<T>{
 
 	private T element;
-	private Nodo<T> next;
+	private Node<T> next;
 	
-	public Nodo(T element, Nodo<T> next) {
+	public Node(T element, Node<T> next) {
 		this.element = element;
 		this.next = next;
 	}
@@ -25,7 +25,7 @@ public class Nodo<T>{
 		this.element = element;
 	}
 
-	public void setNext(Nodo<T> next) {
+	public void setNext(Node<T> next) {
 		this.next = next;
 	}
 
@@ -33,7 +33,7 @@ public class Nodo<T>{
 		return element;
 	}
 
-	public Nodo<T> getNext() {
+	public Node<T> getNext() {
 		return next;
 	}
 

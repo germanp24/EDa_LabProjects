@@ -2,5 +2,7 @@ package List;
 
 public interface Comparable<T> {
 
-	public boolean CompararCon(T element);
+	public boolean CompareTo(T element);
+	
+	
 }

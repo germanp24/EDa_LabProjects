@@ -25,9 +25,6 @@ public class ListStatic<T> implements List<T> {
 		}
 			list[top] = element;
 			top++;
-			
-		
-		
 	}
 
 	

@@ -22,7 +22,7 @@ public class ListDynamic<T> implements List<T> {
 		if (isEmpty()) {
 			first = aux;
 			last = aux;
-
+			
 		} else {
 			if (size() == 1) {
 				first.setNext(aux);
@@ -33,6 +33,7 @@ public class ListDynamic<T> implements List<T> {
 
 		}
 		size++;
+		
 	}
 
 	
@@ -50,20 +51,22 @@ public class ListDynamic<T> implements List<T> {
 	
 	public boolean exists(T element) throws EmptyListException {
 		boolean match = false;
-
 		if (isEmpty()) {
 
 			throw new EmptyListException("La lista esta vacia");
 		} else {
 
 			Nodo<T> aux = new Nodo(element, null);
-			first = aux;
-
+			Nodo<T> aux1 = new Nodo();
+			aux1=first;
+			first=aux;
+			first.setNext(aux1);
 			while ((aux.getNext() != null) && !match) {
-				match = (element == aux.getElement());
+			
+				match = aux.CompareTo(element);
 				aux = aux.getNext();
 			}
-
+			first=aux1;
 			return match;
 		}
 
@@ -161,19 +164,22 @@ public class ListDynamic<T> implements List<T> {
 		size--;
 	}
 
-	
+
 	public int locate(T element) throws EmptyListException {
 		int n = 0;
+		T elemento;
+	
 		boolean match = false;
 		if (isEmpty()) {
 			throw new EmptyListException("Esta lista esta vacia");
 
 		} else {
 			Nodo<T> aux = new Nodo();
-			aux = first;
+			aux=first;
 			for (int i = 0; (i < size()) && (n == 0); i++) {
-
-				if (aux.CompararCon(element)) {
+				elemento=aux.getElement();
+				
+				if (((Diccionario)elemento).equal(element)) {
 					n = i;
 					match = true;
 				} else {
