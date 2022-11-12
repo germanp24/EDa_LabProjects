@@ -13,7 +13,6 @@ package Stack;
 
 public class Main {
 	public static void main(String[] args) {
-
 		
 		StackStatic<Integer> staticStack = new StackStatic<Integer>();
 		StackDynamic<Integer> dynamicStack = new StackDynamic<Integer>();
