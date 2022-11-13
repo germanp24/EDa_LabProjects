@@ -15,7 +15,7 @@ public class Node<T> {
 	private Node<T> next;
 	
 /**
- * A constructor that initializes the element and the next node.
+ * Node constructor
  * 
  * @param element T
  * @param next Node<T>

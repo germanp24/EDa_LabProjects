@@ -11,6 +11,11 @@ package List;
 
 public class ElementDoesNotExistException extends RuntimeException {
 
+/**
+ * ElementDoesNotExistException constructor.
+ * 
+ * @param e
+ */
 	public ElementDoesNotExistException(String e) {
 		super(e);
 	}

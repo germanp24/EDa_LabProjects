@@ -11,5 +11,11 @@ package List;
 // An interface that is used to compare two objects.
 public interface Comparable<T> {
 
+/**
+ * Returns true if the element is equal to the element in the node
+ * 
+ * @param element The element to compare to.
+ * @return A boolean value.
+ */
 	public boolean CompareTo(T element);
 }

@@ -21,12 +21,21 @@ public class ListDynamic<T> implements List<T> {
 
 	private int size;
 
+/**
+ * The constructor of the class, it is used to initialize the variables of the class.
+ */
 	public ListDynamic() {
 		first = null;
 		last = null;
 		size = 0;
 	}
 	
+/**
+ * If the list is empty, then the new node is the first and last node. If the list has one element, then the new node is the last
+ * node. If the list has more than one element, then the new node is the last node
+ * 
+ * @param element The element to be added to the list.
+ */
 	public void add(T element) {
 		Nodo<T> aux = new Nodo(element, null);
 
@@ -45,15 +54,32 @@ public class ListDynamic<T> implements List<T> {
 		size++;
 	}
 	
+/**
+ * Returns true if the stack is empty, false otherwise
+ * 
+ * @return The size of the queue
+ */
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return size == 0;
 	}
 	
+/**
+ * Returns the number of elements in the list
+ * 
+ * @return The size of the array.
+ */
 	public int size() {
 		return size;
 	}
 	
+
+/**
+ * It checks if the element exists in the list
+ * 
+ * @param element The element to be searched for.
+ * @return The method returns a boolean value.
+ */
 	public boolean exists(T element) throws EmptyListException {
 		boolean match = false;
 		if (isEmpty()) {
@@ -67,7 +93,7 @@ public class ListDynamic<T> implements List<T> {
 			first=aux;
 			first.setNext(aux1);
 			while ((aux.getNext() != null) && !match) {
-			
+
 				match = aux.CompareTo(element);
 				aux = aux.getNext();
 			}
@@ -76,6 +102,12 @@ public class ListDynamic<T> implements List<T> {
 		}
 	}
 	
+/**
+ * It returns the element at the nth position of the list
+ * 
+ * @param n the index of the element to be returned
+ * @return The element of the node in the position n.
+ */
 	public T get(int n) throws EmptyListException {
 
 		if ((n < 0 || n >= size())) {
@@ -102,6 +134,12 @@ public class ListDynamic<T> implements List<T> {
 	}
 
 	
+/**
+ * It takes an element and an integer as parameters, and inserts the element at the position specified by the integer
+ * 
+ * @param element The element to be added to the list.
+ * @param n The position where the element will be inserted.
+ */
 	public void put(T element, int n) {
 		if ((n < 0 || n >= size())) {
 			throw new RuntimeException("El numero introducido es negativo, o es mayor al tamano de la lista");
@@ -126,6 +164,11 @@ public class ListDynamic<T> implements List<T> {
 		}
 	}
 	
+/**
+ * This function removes an element from the list.
+ * 
+ * @param n The index of the element to be removed.
+ */
 	public void remove(int n) throws EmptyListException {
 		if (isEmpty()) {
 			throw new EmptyListException("La lista esta vacia");
@@ -164,6 +207,12 @@ public class ListDynamic<T> implements List<T> {
 		size--;
 	}
 
+/**
+ * It returns the index of the first element in the list that matches the element passed as a parameter
+ * 
+ * @param element The element to be located.
+ * @return The position of the element in the list.
+ */
 	public int locate(T element) throws EmptyListException {
 		int n = 0;
 		T elemento;

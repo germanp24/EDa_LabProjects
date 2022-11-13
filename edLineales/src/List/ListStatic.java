@@ -17,12 +17,20 @@ import List.EmptyListException;
 public class ListStatic<T> implements List<T> {
 	private T [] list;
 	private int top;
-	
+
+/**
+ * The constructor of the class, it is used to initialize the variables of the class.
+ */
 	public ListStatic() {
 		top = 0;
 		list = (T[]) new Object [100];
 	}
 	
+/**
+ * If the list is not full, add the element to the top of the list
+ * 
+ * @param element the element to be added to the stack
+ */
 	public void add(T element) {
 		if(list.length>top) {
 			add(element);
@@ -31,14 +39,30 @@ public class ListStatic<T> implements List<T> {
 			top++;
 	}
 
+/**
+ * If the top of the stack is equal to 0, then the stack is empty
+ * 
+ * @return The method isEmpty() returns a boolean value.
+ */
 	public boolean isEmpty() {
 		return top == 0;
 	}
 	
+/**
+ * Returns the number of elements in the stack
+ * 
+ * @return The top of the stack
+ */
 	public int size() {
 		return this.top;
 	}
 	
+/**
+ * This function checks if an element exists in the list
+ * 
+ * @param element The element to be searched for.
+ * @return The method returns a boolean value.
+ */
 	public boolean exists(T element) throws EmptyListException {
 		boolean igual = false;
 		
@@ -56,6 +80,12 @@ public class ListStatic<T> implements List<T> {
 		return igual;
 	}
 	
+/**
+ * This function returns the element at the specified position in this list
+ * 
+ * @param n the index of the element you want to get
+ * @return The element in the position n of the list.
+ */
 	public T get(int n) throws EmptyListException {
 		T element;
 		
@@ -69,10 +99,16 @@ public class ListStatic<T> implements List<T> {
 		}
 	}
 	
+/**
+ * This function inserts an element at a given position in the list
+ * 
+ * @param element The element to be added to the list.
+ * @param n The position where the element will be inserted.
+ */
 	public void put(T element, int n) {
 		if(n<0 || n>size()) {
 			
-			throw new RuntimeException("El numero  es negativo, o es mayor al tamanoo de esta lista");
+			throw new RuntimeException("El numero es negativo, o es mayor al tamanoo de esta lista");
 		}else {
 			for (int i = n; i<top; i++) {
 				list[i+1]=list[i];
@@ -82,6 +118,11 @@ public class ListStatic<T> implements List<T> {
 		}
 	}
 
+/**
+ * This function removes an element from the list, and shifts all the elements after it to the left
+ * 
+ * @param n The index of the element to be removed.
+ */
 	public void remove(int n) throws EmptyListException {
 		T element;
 		
@@ -99,6 +140,12 @@ public class ListStatic<T> implements List<T> {
 		}
 	}
 	
+/**
+ * This function returns the position of the element in the list
+ * 
+ * @param element The element to be located.
+ * @return The position of the element in the list.
+ */
 	public int locate(T element) throws EmptyListException {
 		int pos;
 		boolean exists=false;

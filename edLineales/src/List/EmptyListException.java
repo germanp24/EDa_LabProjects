@@ -11,6 +11,10 @@ package List;
 
 public class EmptyListException extends RuntimeException{
 	
+/**
+ * EmptyListException constructor.
+ * @param err
+ */	
 	public EmptyListException(String err) {
 		super(err);
 	}
