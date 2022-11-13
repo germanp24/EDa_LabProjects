@@ -11,6 +11,12 @@ package Stack;
 
 public class EmptyStackException extends RuntimeException{
 
+/**
+ * A constructor that takes a string as a parameter and calls
+ * the super class constructor with the same parameter.
+ * @param e The String that receives the constructor
+ */
+
 	public EmptyStackException(String e){
 		super(e);
 	}

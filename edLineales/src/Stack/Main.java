@@ -9,9 +9,13 @@ package Stack;
  * @version: 1.0
  */
 
-
-
 public class Main {
+
+	/**
+	 * Method containing the main execution of our program.
+	 * @param args String[]
+	 * 
+	 */
 	public static void main(String[] args) {
 		
 		StackStatic<Integer> staticStack = new StackStatic<Integer>();
@@ -19,10 +23,14 @@ public class Main {
 		System.out.println("Pila dinamica: \n" );
 		stack(dynamicStack);
 		System.out.println("Pila estatica: \n" );
-		stack(staticStack);
-		
-		
+		stack(staticStack);	
 	}
+	
+/**
+ * We create a stack, add two elements, print the top element, print the size of the stack, remove the top element, remove the top
+ * element, print whether the stack is empty, add two elements, print the top element, and print whether the stack is empty
+ * @param pila Stack
+ */
 	public static void stack(Stack pila) {
 
 		pila.push(2);
@@ -30,17 +38,17 @@ public class Main {
 
 		System.out.println("El top de la pila es "+ pila.top());
 
-		System.out.println("El tamaño de la pila es "+pila.size());
+		System.out.println("El tamanio de la pila es "+pila.size());
 		
 		System.out.println("Hemos quitado el elemento " +pila.pop()+" de la pila");
 		System.out.println("Hemos quitado el elemento " +pila.pop()+" de la pila");
 
-		System.out.println("¿La pila esta vacia? :"+pila.isEmpty());
+		System.out.println("La pila esta vacia? :"+pila.isEmpty());
 
 		pila.push(4);
 		pila.push(5);
 		
 		System.out.println("El top de la pila es "+ pila.top());
-		System.out.println("¿La pila esta vacia? :"+pila.isEmpty()+"\n");
+		System.out.println("La pila esta vacia? :"+pila.isEmpty()+"\n");
 	}
 }
