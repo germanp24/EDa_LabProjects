@@ -20,7 +20,10 @@ public class main {
 	static ListDynamic<Diccionario> diccionario = new ListDynamic<Diccionario>();
 	private static Diccionario dic, dicc;
 	
-
+	/**
+	 * Method containing the main execution of our program.
+	 * @param args String[]
+	 */
 	public static void main(String[] args) {
 		 String Termino = null;
 		String Definicion=null;

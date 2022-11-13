@@ -22,12 +22,20 @@ public class QueueStatic<T> implements Queue<T>{
 	private int sizeControl;
 	
 	
+/**
+ * The constructor of the class, it is used to initialize the variables of the class.
+ */
 	public QueueStatic() {
 		size = 100;
 		sizeControl = 0;
 		cola = (T[]) new Object [size];
 	}      
 	
+/**
+ * This function adds an element to the queue
+ * 
+ * @param element The element to be added to the queue.
+ */
 	public void enqueue(T element) {
 		
 		if(sizeControl>size){
@@ -38,6 +46,11 @@ public class QueueStatic<T> implements Queue<T>{
 		}
 	}  
 	
+/**
+ * This function removes the first element of the queue and returns it
+ * 
+ * @return The first element of the queue.
+ */
 	public T dequeue() throws EmptyQueueException {
 		
 		if(isEmpty()) {
@@ -57,6 +70,11 @@ public class QueueStatic<T> implements Queue<T>{
 	}
 
 	
+/**
+ * Returns the element at the front of the queue without removing it
+ * 
+ * @return The first element of the queue.
+ */
 	public T front() throws EmptyQueueException {
 		if (isEmpty()) {
 			throw new EmptyQueueException("Esta cola esta vacia");
@@ -67,11 +85,21 @@ public class QueueStatic<T> implements Queue<T>{
 	}
 
 	
+/**
+ * Returns true if the size of the list is 0, false otherwise
+ * 
+ * @return The size of the stack.
+ */
 	public boolean isEmpty() {
 		return sizeControl==0;
 	}
 
 	
+/**
+ * Returns the number of elements in the list
+ * 
+ * @return The size of the list.
+ */
 	public int size() {
 		return sizeControl;
 	}

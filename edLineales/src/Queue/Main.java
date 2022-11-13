@@ -14,6 +14,10 @@ import java.util.Scanner;
 public class Main {
 	final static Scanner KEYBOARD = new Scanner(System.in);
 
+	/**
+	 * Method containing the main execution of our program.
+	 * @param args String[]
+	 */
 	public static void main(String[] args) {
 		int nShares = 0;
 		int pShares = 0;
@@ -85,6 +89,15 @@ public class Main {
 		}
 	}
 
+/**
+ * This function takes a queue of shares, the number of shares to sell, and the price of the shares, and returns the amount of
+ * money made from selling the shares
+ * 
+ * @param colaAcciones QueueDynamic<Shares>
+ * @param nShares number of shares to sell
+ * @param pShares the price of the shares
+ * @return The amount of money that the investor has earned.
+ */
 	public static int VenderAcciones(QueueDynamic<Shares> colaAcciones, int nShares, int pShares) {
 		int venta = 0;
 

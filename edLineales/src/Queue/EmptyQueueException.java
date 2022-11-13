@@ -11,6 +11,11 @@ package Queue;
 
 public class EmptyQueueException extends RuntimeException{
 
+/**
+ * A constructor that receives a string as a parameter and calls the constructor
+ * of the superclass (RuntimeException) with the same parameter.
+ * @param e
+ */
 	public EmptyQueueException(String e) {
 		super(e);
 	}
