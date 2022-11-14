@@ -88,7 +88,7 @@ public class main {
 					System.out.println("Consultar numero de terminos definidos");
 					System.out.println("El numero de terminos definidos es: " + diccionario.size());
 					casos=menu();
-
+					break;
 				case 5:
 					System.out.println("Saliendo del programa");
 					System.exit(0);
