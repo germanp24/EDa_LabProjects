@@ -22,7 +22,7 @@ public class ListStatic<T> implements List<T> {
  * The constructor of the class, it is used to initialize the variables of the class.
  */
 	public ListStatic() {
-		top = 0;
+		top = -1;
 		list = (T[]) new Object [100];
 	}
 	
@@ -32,11 +32,16 @@ public class ListStatic<T> implements List<T> {
  * @param element the element to be added to the stack
  */
 	public void add(T element) {
-		if(list.length>top) {
-			add(element);
+		if(!exists(element)) {
+		if(top==-1) {
+			throw new EmptyListException("La lista esta vacia");
 		}
-			list[top] = element;
 			top++;
+			list[top] = element;
+			
+		}else  {
+			throw new ElementDoesNotExistException("El elemento que quieres introducir ya esta en la lista");
+		}
 	}
 
 /**
@@ -64,7 +69,7 @@ public class ListStatic<T> implements List<T> {
  * @return The method returns a boolean value.
  */
 	public boolean exists(T element) throws EmptyListException {
-		boolean igual = false;
+		boolean match = false;
 		
 		if (isEmpty()) {
 			throw new EmptyListException("Esta lista esta vacia");
@@ -73,11 +78,11 @@ public class ListStatic<T> implements List<T> {
 			for (int i = 0; i<top; i++) {
 				
 				if (element == list[i]) {
-					igual = true;
+					match = true;
 				}
 			}
 		}
-		return igual;
+		return match;
 	}
 	
 /**

@@ -44,13 +44,21 @@ public class ListDynamic<T> implements List<T> {
 			last = aux;
 			
 		} else {
+			
+				if(!exists(element)) {
+			
 			if (size() == 1) {
 				first.setNext(aux);
 			} else {
 				last.setNext(aux);
 			}
 			last = aux;
+
+		}else {
+			throw new ElementDoesNotExistException("El elemento que quieres introducir ya esta en la lista");
 		}
+	}
+		
 		size++;
 	}
 	
@@ -87,17 +95,21 @@ public class ListDynamic<T> implements List<T> {
 			throw new EmptyListException("La lista esta vacia");
 		} else {
 
-			Nodo<T> aux = new Nodo(element, null);
-			Nodo<T> aux1 = new Nodo();
-			aux1=first;
-			first=aux;
-			first.setNext(aux1);
-			while ((aux.getNext() != null) && !match) {
-
-				match = aux.CompareTo(element);
-				aux = aux.getNext();
+			Nodo<T> aux = new Nodo();
+			aux=first;
+			for (int i = 0; (i < size()) && !match; i++) {
+				
+			
+				if (((Diccionario)aux.getElement()).equal(element)) {
+					match = true;
+					
+				} else {
+					if (aux.getNext() != null) {
+						aux = aux.getNext();
+						
+					}
+				}
 			}
-			first=aux1;
 			return match;
 		}
 	}
@@ -111,7 +123,7 @@ public class ListDynamic<T> implements List<T> {
 	public T get(int n) throws EmptyListException {
 
 		if ((n < 0 || n >= size())) {
-			throw new RuntimeException("El numero introducido es negativo, o es mayor al tamanoo de la lista");
+			throw new RuntimeException("El numero introducido es negativo, o es mayor al tamano de la lista");
 		} else if (isEmpty()) {
 			throw new EmptyListException("La lista esta vacia");
 
@@ -215,7 +227,7 @@ public class ListDynamic<T> implements List<T> {
  */
 	public int locate(T element) throws EmptyListException {
 		int n = 0;
-		T elemento;
+		
 	
 		boolean match = false;
 		if (isEmpty()) {
@@ -224,15 +236,18 @@ public class ListDynamic<T> implements List<T> {
 		} else {
 			Nodo<T> aux = new Nodo();
 			aux=first;
-			for (int i = 0; (i < size()) && (n == 0); i++) {
-				elemento=aux.getElement();
+			for (int i = 0; (i < size()) && !match; i++) {
 				
-				if (((Diccionario)elemento).equal(element)) {
+			
+				if (((Diccionario)aux.getElement()).equal(element)) {
+					
 					n = i;
 					match = true;
+					
 				} else {
 					if (aux.getNext() != null) {
 						aux = aux.getNext();
+						
 					}
 				}
 			}

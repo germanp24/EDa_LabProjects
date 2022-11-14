@@ -27,14 +27,10 @@ public class main {
 	public static void main(String[] args) {
 		 String Termino = null;
 		String Definicion=null;
-		System.out.print("Introduce que operacion deseas realizar:\n");
-		System.out.println(" 1. Aniadir termino al diccionario");
-		System.out.println(" 2. Eliminar termino del diccionarios");
-		System.out.println(" 3. Consultar definicion");
-		System.out.println(" 4. Consultar numero de terminos definidos");
-		int casos = TECLADO.nextInt();
+		
+		int casos=menu();
 		{
-			while (casos > 0) {
+			while (true) {
 				switch (casos) {
 				case 1:
 					dic = new Diccionario(null, null);
@@ -60,10 +56,9 @@ public class main {
 						dic.setDefinicion(Definicion);
 					
 					diccionario.add(dic);
-					 
-					System.out.print("Introduzca la operacion que desea realizar: ");
+					
+					casos=menu();
 
-					casos = TECLADO.nextInt();
 					break;
 				case 2:
 					System.out.println("Eliminar termino del diccionarios");
@@ -72,8 +67,8 @@ public class main {
 
 					diccionario.remove(diccionario.locate(dicc));
 
-					System.out.print("Introduzca la operacion que desea realizar: ");
-					casos = TECLADO.nextInt();
+					casos=menu();
+
 					break;
 				case 3:
 					System.out.println("Consultar definicion");
@@ -87,26 +82,38 @@ public class main {
 					System.out.println("La definicion del termino " + Termino + " es : \n"
 							+ diccionario.get(diccionario.locate(dicc)).getDefinicion()+"\n");
 
-					System.out.print("Introduzca la operacion que desea realizar: ");
-					casos = TECLADO.nextInt();
+					casos = menu();
 					break;
 				case 4:
 					System.out.println("Consultar numero de terminos definidos");
 					System.out.println("El numero de terminos definidos es: " + diccionario.size());
-					System.out.print("Introduzca la operacion que desea realizar: \n");
-					casos = TECLADO.nextInt();
+					casos=menu();
+
+				case 5:
+					System.out.println("Saliendo del programa");
+					System.exit(0);
 				default:
-					// falta resolver excepcion para que el programa continue y nos vuelva a pedir
-					// introducir numero de operacion
-					System.out.println("Error, por favor seleccione una de las opciones validas.");
-					System.out.print("Introduce que operacion deseas realizar: \n");
-					System.out.println(" 1. Aniadir termino al diccionario");
-					System.out.println(" 2. Eliminar termino del diccionarios");
-					System.out.println(" 3. Consultar definicion");
-					System.out.println(" 4. Consultar numero de terminos definidos");
-					casos = TECLADO.nextInt();
+					System.out.println("Recuerde introduzca entre 1 y 5");
+						casos=menu();
+						break;
+					
+				
 				}
+				
 			}
 		}
+			
+		
+	}
+	public static int menu() {
+		System.out.print("Introduce que operacion deseas realizar:\n");
+		System.out.println(" 1. Aniadir termino al diccionario");
+		System.out.println(" 2. Eliminar termino del diccionarios");
+		System.out.println(" 3. Consultar definicion");
+		System.out.println(" 4. Consultar numero de terminos definidos");
+		System.out.println(" 5. Salir del programa");
+		int casos = TECLADO.nextInt();
+		
+		return casos;
 	}
 }

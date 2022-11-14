@@ -12,8 +12,8 @@ package List;
 
 public class Diccionario {
 
- String Termino;
- String Definicion;
+ private String Termino;
+ private String Definicion;
 
 /**
  * Diccionario constructor.
