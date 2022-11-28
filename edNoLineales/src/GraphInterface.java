@@ -1,5 +1,3 @@
-
-
 import java.util.TreeMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +14,7 @@ import java.util.Iterator;
  *
  */
 
-public interface Graph<V, E> {
+public interface GraphInterface<V, E> {
 /**
  * Inserts a vertex with element e in the graph
  * @param e

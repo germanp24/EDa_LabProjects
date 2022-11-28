@@ -17,7 +17,7 @@ import java.util.Iterator;
  * @version November 2014
  *
  */
-public class TreeMapGraph<V, E> implements Graph<V, E> {
+public class TreeMapGraph<V, E> implements GraphInterface<V, E> {
 
   /**
    * vertices is an associative container containing the vertices/nodes of the

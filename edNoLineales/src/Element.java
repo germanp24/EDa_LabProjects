@@ -14,7 +14,7 @@
  * @version November 2014
  *
  */
-public interface Element {
+public interface Element<T> {
   /**
    * This method returns the ID of the element
    * @return A string with the ID of the element
