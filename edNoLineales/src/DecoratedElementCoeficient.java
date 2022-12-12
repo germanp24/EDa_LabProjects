@@ -1,4 +1,8 @@
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class DecoratedElementCoeficient<T> implements Element {
 
 	private String ID;
@@ -7,9 +11,9 @@ public class DecoratedElementCoeficient<T> implements Element {
 	private DecoratedElementCoeficient<T> parent;
 	private int distance;
 
-	public DecoratedElementCoeficient(String key, T element) {
-		this.element = element;
-		ID = key;
+	public DecoratedElementCoeficient( T element) {
+		
+		ID=String.valueOf(element);
 		visited = false;
 		distance = 0;
 		parent = null;
@@ -56,15 +60,50 @@ public class DecoratedElementCoeficient<T> implements Element {
 	}
 
 	public boolean equals(Object n) {
-		return (ID.equals(((DecoratedElementCoeficient) n).getID())
-				&& element.equals(((DecoratedElementCoeficient<T>) n).getElement()));
+		System.out.println(String.valueOf(ID));
+		System.out.println(((DecoratedElementCoeficient<T>) n).getID());
+		return  ID.equals(((DecoratedElementCoeficient<T>) n).getID());
 	}
     public String toString(){
         return element.toString();
     }
-    public DecoratedElementCoeficient<T> pathBFS(TreeMapGraph g, Vertex<DecoratedElementCoeficient>s,Vertex<DecoratedElementCoeficient>t){
-    	DecoratedElementCoeficient element =null;
-		return element;
-    	
+    public static int pathBFS(TreeMapGraph g, Vertex<DecoratedElementCoeficient>s,Vertex<DecoratedElementCoeficient>t){
+    	Queue<Vertex<DecoratedElementCoeficient>> q = new LinkedList();
+    	boolean noEnd= true;
+    	Vertex<DecoratedElementCoeficient> u,v;
+    	DecoratedElementCoeficient el;
+    	Edge e;
+    	Iterator<Edge> it;
+    	int l=0;
+		Iterator<Vertex<DecoratedElementCoeficient>> itAux;
+		itAux=g.getVertices();
+		while(itAux.hasNext()) {
+			el=itAux.next().getElement();
+			el.setVisited(false);
+			el.setDistance(0);
+		}
+		s.getElement().setVisited(true);
+		q.offer(s);
+		while(!q.isEmpty() && noEnd) {
+			u=q.poll();
+			it=g.incidentEdges(u);
+			while(it.hasNext() && noEnd) {
+				e=it.next();
+				v=g.opposite(u, e);
+				if(!(v.getElement()).isVisited()) {
+					(v.getElement()).setVisited(true);
+					(v.getElement()).setDistance(((u.getElement()).getDistance())+1);
+					q.offer(v);
+					noEnd=!(v.getElement().equals(t.getElement()));
+				}
+			}
+		}
+		if(!noEnd) {
+			l=t.getElement().getDistance();
+		}else {
+			l=-1;
+		}
+		return l;
+
     }
 }

@@ -1,5 +1,8 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -15,11 +18,16 @@ import java.util.UUID;
  */
 
 public class Main {
+	 static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
+		TreeMapGraph Grafo = new TreeMapGraph();
+
 		String p1 = null, p2 = null;
 		int peso = 0;
-		int key=0;
+		int key = 0;
+
+		Scanner read = new Scanner(System.in);
 		Scanner sc = new Scanner(new File("C:\\Users\\Victo\\git\\EDA\\edNoLineales\\marvel-unimodal-edges.csv"));
 		sc.nextLine();
 		boolean nombre = false;
@@ -58,14 +66,58 @@ public class Main {
 				System.out.println("Error");
 				System.exit(0);
 			}
-			DecoratedElementCoeficient<String> P1 = new DecoratedElementCoeficient(String.valueOf(key), p1);
-			DecoratedElementCoeficient<String> P2 = new DecoratedElementCoeficient(String.valueOf(key++), p2);
-			key++;
-			TreeMapGraph Grafo = new TreeMapGraph();
+			DecoratedElementCoeficient<String> P1 = new DecoratedElementCoeficient(p1);
+			DecoratedElementCoeficient<String> P2 = new DecoratedElementCoeficient(p2);
+		
 			Grafo.insertEdge(P1, P2, (int) peso);
+
 		}
 
 		sc.close();
+
+		System.out.print("Introduce que operación deseas realizar:\n");
+		System.out.println(" 1. Recorrer el grafo con el camino BFS");
+		System.out.println(" 2. Recorrer el grafo con el camino DFS");
+		int casos = read.nextInt();
+		while (casos > 0) {
+			switch (casos) {
+			case 1:
+				System.out.println("Has seleccionado la opcion 1: Recorrido con BFS");
+				System.out.println("Escribe el nombre del primer personaje");
+				p1 = br.readLine();
+
+				System.out.println("Escribe el nombre del segundo personaje");
+				p2 = br.readLine();
+				
+				DecoratedElementCoeficient<String> P1 = new DecoratedElementCoeficient(p1);
+				DecoratedElementCoeficient<String> P2 = new DecoratedElementCoeficient(p2);
+				Vertex<DecoratedElementCoeficient> V1= Grafo.getVertex(P1.getID());
+				Vertex<DecoratedElementCoeficient> V2= Grafo.getVertex(P2.getID());
+				System.out.println( P2.pathBFS(Grafo,V1 , V2));
+				System.out.print("Introduce que operación deseas realizar:");
+				casos = read.nextInt();
+				break;
+			case 2:
+				System.out.println(" Has seleccionado la opcion 2: Recorrido con DFS");
+				System.out.println("Escribe el nombre del primer personaje");
+				p1 = read.next();
+				System.out.println("Escribe el nombre del segundo personaje");
+				p2 = read.next();
+				System.out.print("Introduce que operación deseas realizar:");
+
+				casos = read.nextInt();
+				break;
+			default:
+				// falta resolver excepcion para que el programa continue y nos vuelva a pedir
+				// introducir numero de operación
+				System.out.println("Error, por favor seleccione una de las opciones válidas.");
+				System.out.print("Introduce que operación deseas realizar:");
+				System.out.println(" 1. Recorrer el grafo con el camino BFS");
+				System.out.println(" 2. Recorrer el grafo con el camino DFS");
+				casos = read.nextInt();
+			}
+		}
+		
 
 	}
 
