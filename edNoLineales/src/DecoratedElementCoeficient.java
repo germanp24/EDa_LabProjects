@@ -1,6 +1,9 @@
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class DecoratedElementCoeficient<T> implements Element {
@@ -60,15 +63,18 @@ public class DecoratedElementCoeficient<T> implements Element {
 	}
 
 	public boolean equals(Object n) {
-		System.out.println(String.valueOf(ID));
-		System.out.println(((DecoratedElementCoeficient<T>) n).getID());
+		
+			
+		
+		
 		return  ID.equals(((DecoratedElementCoeficient<T>) n).getID());
 	}
     public String toString(){
         return element.toString();
     }
-    public static int pathBFS(TreeMapGraph g, Vertex<DecoratedElementCoeficient>s,Vertex<DecoratedElementCoeficient>t){
+    public static int pathBFS(TreeMapGraph g, Vertex<DecoratedElementCoeficient> s,Vertex<DecoratedElementCoeficient> t){
     	Queue<Vertex<DecoratedElementCoeficient>> q = new LinkedList();
+    	
     	boolean noEnd= true;
     	Vertex<DecoratedElementCoeficient> u,v;
     	DecoratedElementCoeficient el;
@@ -84,10 +90,13 @@ public class DecoratedElementCoeficient<T> implements Element {
 		}
 		s.getElement().setVisited(true);
 		q.offer(s);
+		
 		while(!q.isEmpty() && noEnd) {
 			u=q.poll();
 			it=g.incidentEdges(u);
+	
 			while(it.hasNext() && noEnd) {
+				
 				e=it.next();
 				v=g.opposite(u, e);
 				if(!(v.getElement()).isVisited()) {

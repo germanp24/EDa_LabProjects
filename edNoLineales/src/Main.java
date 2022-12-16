@@ -37,6 +37,7 @@ public class Main {
 
 			if (tokens.length == 3) {
 				p1 = tokens[0];
+				
 				p2 = tokens[1];
 				peso = Integer.parseInt(tokens[2]);
 			} else if (tokens.length == 4) {
@@ -49,6 +50,7 @@ public class Main {
 					if (nombre) {
 
 						p1 = tokens[0] + "," + tokens[1];
+						
 						p2 = tokens[2];
 						peso = Integer.parseInt(tokens[3]);
 					} else {
@@ -56,6 +58,7 @@ public class Main {
 						p2 = tokens[1] + "," + tokens[2];
 						peso = Integer.parseInt(tokens[3]);
 					}
+					nombre=false;
 				}
 
 			} else if (tokens.length == 5) {
@@ -78,6 +81,8 @@ public class Main {
 		System.out.print("Introduce que operación deseas realizar:\n");
 		System.out.println(" 1. Recorrer el grafo con el camino BFS");
 		System.out.println(" 2. Recorrer el grafo con el camino DFS");
+		System.out.println(" 3.Salir");
+
 		int casos = read.nextInt();
 		while (casos > 0) {
 			switch (casos) {
@@ -85,13 +90,14 @@ public class Main {
 				System.out.println("Has seleccionado la opcion 1: Recorrido con BFS");
 				System.out.println("Escribe el nombre del primer personaje");
 				p1 = br.readLine();
-
+				DecoratedElementCoeficient<String> P1 = new DecoratedElementCoeficient(p1);
+				Vertex<DecoratedElementCoeficient> V1= Grafo.getVertex(P1.getID());
+				
 				System.out.println("Escribe el nombre del segundo personaje");
 				p2 = br.readLine();
 				
-				DecoratedElementCoeficient<String> P1 = new DecoratedElementCoeficient(p1);
+				
 				DecoratedElementCoeficient<String> P2 = new DecoratedElementCoeficient(p2);
-				Vertex<DecoratedElementCoeficient> V1= Grafo.getVertex(P1.getID());
 				Vertex<DecoratedElementCoeficient> V2= Grafo.getVertex(P2.getID());
 				System.out.println( P2.pathBFS(Grafo,V1 , V2));
 				System.out.print("Introduce que operación deseas realizar:");
@@ -107,6 +113,8 @@ public class Main {
 
 				casos = read.nextInt();
 				break;
+			case 3:
+				System.exit(0);
 			default:
 				// falta resolver excepcion para que el programa continue y nos vuelva a pedir
 				// introducir numero de operación
@@ -114,6 +122,7 @@ public class Main {
 				System.out.print("Introduce que operación deseas realizar:");
 				System.out.println(" 1. Recorrer el grafo con el camino BFS");
 				System.out.println(" 2. Recorrer el grafo con el camino DFS");
+				System.out.println(" 3.Salir");
 				casos = read.nextInt();
 			}
 		}
