@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.UUID;
 
 /**
@@ -13,12 +14,12 @@ import java.util.UUID;
  * 
  * @authors: Andrea Ordono, Victor Centellas, David Garcia, German Pajarero
  * 
- * @date: November 28, 2022
+ * @date: December 2022
  * @version: 1.0
  */
 
 public class Main {
-	 static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	public static void main(String[] args) throws IOException {
 		TreeMapGraph Grafo = new TreeMapGraph();
@@ -26,7 +27,10 @@ public class Main {
 		String p1 = null, p2 = null;
 		int peso = 0;
 		int key = 0;
-
+		DecoratedElementCoeficient<String> P1;
+		DecoratedElementCoeficient<String> P2;
+		Vertex<DecoratedElementCoeficient> V1;
+		Vertex<DecoratedElementCoeficient> V2;
 		Scanner read = new Scanner(System.in);
 		Scanner sc = new Scanner(new File("C:\\Users\\Victo\\git\\EDA\\edNoLineales\\marvel-unimodal-edges.csv"));
 		sc.nextLine();
@@ -37,20 +41,20 @@ public class Main {
 
 			if (tokens.length == 3) {
 				p1 = tokens[0];
-				
+
 				p2 = tokens[1];
 				peso = Integer.parseInt(tokens[2]);
 			} else if (tokens.length == 4) {
-				for (int i = 0; i < tokens[0].length(); i++) {
-					if (tokens[0].charAt(i) == '"') {
+				
+					if (tokens[0].charAt(0) == '"') {
 
 						nombre = true;
-
 					}
+					
 					if (nombre) {
 
 						p1 = tokens[0] + "," + tokens[1];
-						
+
 						p2 = tokens[2];
 						peso = Integer.parseInt(tokens[3]);
 					} else {
@@ -58,8 +62,8 @@ public class Main {
 						p2 = tokens[1] + "," + tokens[2];
 						peso = Integer.parseInt(tokens[3]);
 					}
-					nombre=false;
-				}
+					nombre = false;
+				
 
 			} else if (tokens.length == 5) {
 				p1 = tokens[0] + "," + tokens[1];
@@ -69,9 +73,9 @@ public class Main {
 				System.out.println("Error");
 				System.exit(0);
 			}
-			DecoratedElementCoeficient<String> P1 = new DecoratedElementCoeficient(p1);
-			DecoratedElementCoeficient<String> P2 = new DecoratedElementCoeficient(p2);
-		
+			 P1 = new DecoratedElementCoeficient(p1);
+			 P2 = new DecoratedElementCoeficient(p2);
+
 			Grafo.insertEdge(P1, P2, (int) peso);
 
 		}
@@ -79,54 +83,72 @@ public class Main {
 		sc.close();
 
 		System.out.print("Introduce que operación deseas realizar:\n");
-		System.out.println(" 1. Recorrer el grafo con el camino BFS");
+		System.out.println(" 1.Info del grafo");
 		System.out.println(" 2. Recorrer el grafo con el camino DFS");
-		System.out.println(" 3.Salir");
+		System.out.println(" 3. Recorrer el grafo con el camino BFS");
+		System.out.println(" 4.Salir");
 
 		int casos = read.nextInt();
 		while (casos > 0) {
 			switch (casos) {
 			case 1:
-				System.out.println("Has seleccionado la opcion 1: Recorrido con BFS");
-				System.out.println("Escribe el nombre del primer personaje");
-				p1 = br.readLine();
-				DecoratedElementCoeficient<String> P1 = new DecoratedElementCoeficient(p1);
-				Vertex<DecoratedElementCoeficient> V1= Grafo.getVertex(P1.getID());
-				
-				System.out.println("Escribe el nombre del segundo personaje");
-				p2 = br.readLine();
-				
-				
-				DecoratedElementCoeficient<String> P2 = new DecoratedElementCoeficient(p2);
-				Vertex<DecoratedElementCoeficient> V2= Grafo.getVertex(P2.getID());
-				System.out.println( P2.pathBFS(Grafo,V1 , V2));
+				System.out.println(" Has seleccionado la opcion 1: Información del grafo");
+				System.out.println("El número de personajes del grafo es: "+Grafo.getN());
+				System.out.println("El número de relaciones entre personajes es de: "+ Grafo.getM());
+				System.out.println("El/Los personaje/s más sociable/s es: " +DecoratedElementCoeficient.masSociable(Grafo).getID());
+				System.out.println("El/Los personaje/s menos sociable/s es: "+DecoratedElementCoeficient.menosSociable(Grafo).getID());
 				System.out.print("Introduce que operación deseas realizar:");
+
 				casos = read.nextInt();
 				break;
 			case 2:
+				Stack<Edge> p = new Stack();
 				System.out.println(" Has seleccionado la opcion 2: Recorrido con DFS");
 				System.out.println("Escribe el nombre del primer personaje");
-				p1 = read.next();
+				p1 = br.readLine();
+				P1 = new DecoratedElementCoeficient(p1);
+				V1 = Grafo.getVertex(P1.getID());
+
 				System.out.println("Escribe el nombre del segundo personaje");
-				p2 = read.next();
+				p2 = br.readLine();
+
+				P2 = new DecoratedElementCoeficient(p2);
+				V2 = Grafo.getVertex(P2.getID());
+				System.out.println( DecoratedElementCoeficient.pathDFS(Grafo, V1, V2,p));
 				System.out.print("Introduce que operación deseas realizar:");
 
 				casos = read.nextInt();
 				break;
 			case 3:
+				System.out.println("Has seleccionado la opcion 3: Recorrido con BFS");
+				System.out.println("Escribe el nombre del primer personaje");
+				p1 = br.readLine();
+				P1 = new DecoratedElementCoeficient(p1);
+				V1 = Grafo.getVertex(P1.getID());
+
+				System.out.println("Escribe el nombre del segundo personaje");
+				p2 = br.readLine();
+
+				P2 = new DecoratedElementCoeficient(p2);
+				V2 = Grafo.getVertex(P2.getID());
+				System.out.println("La distancia entre " + p1 + " y " + p2 + " es de: " + DecoratedElementCoeficient.pathBFS(Grafo, V1, V2));
+				System.out.print("Introduce que operación deseas realizar:");
+				casos = read.nextInt();
+				break;
+			case 4:
 				System.exit(0);
 			default:
 				// falta resolver excepcion para que el programa continue y nos vuelva a pedir
 				// introducir numero de operación
 				System.out.println("Error, por favor seleccione una de las opciones válidas.");
 				System.out.print("Introduce que operación deseas realizar:");
-				System.out.println(" 1. Recorrer el grafo con el camino BFS");
+				System.out.println(" 1.Info del grafo");
 				System.out.println(" 2. Recorrer el grafo con el camino DFS");
-				System.out.println(" 3.Salir");
+				System.out.println(" 3. Recorrer el grafo con el camino BFS");
+				System.out.println(" 4. Salir");
 				casos = read.nextInt();
 			}
 		}
-		
 
 	}
 

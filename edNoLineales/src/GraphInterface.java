@@ -4,14 +4,11 @@ import java.util.List;
 import java.util.Iterator;
 
 /**
- * This interface defines the functionality of an undirected graph where
- * elements can be stored in vertices and edges.
+ * This interface defines the functionality of an undirected graph where elements can be stored in vertices and edges.
  *
- * @author Alfonso Niño
- * @author Camelia Muñoz-Caro
- * @author Crescencio Bravo
- * @version November 2014
- *
+ * @author Victor Centellas, David Garcia, Andrea Ordono, German Pajarero
+ * @date December 2022
+ * @version 1.0
  */
 
 public interface GraphInterface<V, E> {
@@ -200,5 +197,4 @@ public interface GraphInterface<V, E> {
    * @return The number of edges in the graph.
    */
   public int getM();
-
 }

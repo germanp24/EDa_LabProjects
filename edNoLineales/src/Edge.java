@@ -1,11 +1,12 @@
 
 
 /**
- * This class represents the basic functional behavior of an edge in
- * a graph.
- * @author Alfonso Niño, Camelia Muñoz-Caro & Crescencio Bravo
- * @version November 2014
+ * This class represents the basic functional behavior of an edge in a graph.
+ * @author Victor Centellas, David Garcia, Andrea Ordono, German Pajarero
+ * @date December 2022
+ * @version 1.0
  */
+
 public interface Edge<E> {
   /**
    * This method returns the ID of the edge.

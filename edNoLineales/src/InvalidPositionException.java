@@ -2,7 +2,7 @@
  * This class is a subclass of RuntimeException that is thrown when a position is invalid
  *
  * @authors: Andrea Ordono, Victor Centellas, David Garcia, German Pajarero
- * @date: November 28, 2022
+ * @date: December 2022
  * @version: 1.0
  */
  

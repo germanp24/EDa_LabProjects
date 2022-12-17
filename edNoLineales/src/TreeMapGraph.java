@@ -1,5 +1,3 @@
-
-
 import java.util.TreeMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,12 +9,11 @@ import java.util.Iterator;
  * locating or deleting edges and nodes are guarenteed to be done in
  * logarithmic time.
  *
- * @author Alfonso Niño
- * @author Camelia Muñoz-Caro
- * @author Crescencio Bravo
- * @version November 2014
- *
+ * @author Victor Centellas, David Garcia, Andrea Ordono, German Pajarero
+ * @date December 2022
+ * @version 1.0
  */
+
 public class TreeMapGraph<V, E> implements GraphInterface<V, E> {
 
   /**
@@ -585,7 +582,7 @@ public class TreeMapGraph<V, E> implements GraphInterface<V, E> {
       } else  if (e instanceof Integer || e instanceof Long ||
                   e instanceof Short   || e instanceof Float||
 				  e instanceof Double) {
-        ID = ID.valueOf(e);
+        ID = ID.valueOf(n1.getID()+"-"+n2.getID());
         element = e;
       } else if (e instanceof String) {
         ID = (String) e;

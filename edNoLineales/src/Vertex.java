@@ -1,11 +1,9 @@
-
-
-
 /**
  * This class represents the basic functional behavior of a vertex in
  * a graph.
- * @author Alfonso Niño, Camelia Muñoz-Caro & Crescencio Bravo
- * @version November 2014
+ * @author Victor Centellas, David Garcia, Andrea Ordono, German Pajarero
+ * @date November 2014
+ * @version 1.0
  */
 public interface Vertex <V> {
   /**
