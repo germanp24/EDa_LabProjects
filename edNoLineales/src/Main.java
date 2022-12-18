@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.UUID;
@@ -33,7 +36,8 @@ public class Main {
 		Vertex<DecoratedElementCoeficient> V1;
 		Vertex<DecoratedElementCoeficient> V2;
 		Scanner read = new Scanner(System.in);
-		Scanner sc = new Scanner(new File("C:\\Users\\Victo\\git\\EDA\\edNoLineales\\marvel-unimodal-edges.csv"));
+		
+		Scanner sc = new Scanner(new File("C:\\Users\\victo\\eclipse-workspace\\Ed_NoLineales\\src\\ed_noLineales2020_21\\stormofswords.csv"));//C:\\Users\\Victo\\git\\EDA\\edNoLineales\\marvel-unimodal-edges.csv
 		// Es posible que para la entrega haya que modificar la ruta de la linea anterior (?)
 		
 		sc.nextLine();
@@ -119,7 +123,10 @@ public class Main {
 
 				P2 = new DecoratedElementCoeficient(p2);
 				V2 = Grafo.getVertex(P2.getID());
-				System.out.println( DecoratedElementCoeficient.pathDFS(Grafo, V1,V2));
+				DecoratedElementCoeficient.resetGraph(Grafo);
+				Queue cola= new LinkedList();
+			
+				System.out.println( DecoratedElementCoeficient.pathDFS(Grafo, V1,V2,cola,false));
 				System.out.print("Introduce que operación deseas realizar:");
 
 				casos = read.nextInt();
@@ -141,9 +148,10 @@ public class Main {
 				if(resultado==-1) {
 					System.out.println("No existe relacion entre " +p1 +  " y " + p2);
 				}else {
-				System.out.println("La distancia entre " + p1 + " y " + p2 + " es de: " +resultado+"\n");
+				System.out.println("\nLa distancia entre " + p1 + " y " + p2 + " es de: " +resultado+"\n");
 				
-				System.out.println("Y la secuencia entre los personajes es: "+secuencia);
+				Collections.reverse(secuencia);
+				System.out.println("Y la secuencia entre los personajes es: " +secuencia);
 				}
 				System.out.print("Introduce que operación deseas realizar:");
 				casos = read.nextInt();

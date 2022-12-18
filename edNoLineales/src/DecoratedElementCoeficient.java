@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
+import ed_noLineales2020_21.Character;
+import graphsDSESIUCLM.source.Vertex;
+
 /**
  * It's a class that implements the Element interface and it's used to decorate
  * the vertices of a graph.
@@ -83,16 +86,18 @@ public class DecoratedElementCoeficient<T> implements Element {
 	public String toString() {
 		return element.toString();
 	}
-	public static ArrayList masSociables(TreeMapGraph g,Vertex<DecoratedElementCoeficient> personajeMasSociable){
+
+	public static ArrayList masSociables(TreeMapGraph g, Vertex<DecoratedElementCoeficient> personajeMasSociable) {
 		ArrayList personajesMasSociables = new ArrayList();
 		personajesMasSociables.add(personajeMasSociable.getElement());
-		Iterator gradoVertice =g.incidentEdges(personajeMasSociable);
-		int gradoCadaVertice=0;
-		int gradoVerticeMax=0;
+		Iterator gradoVertice = g.incidentEdges(personajeMasSociable);
+		int gradoCadaVertice = 0;
+		int gradoVerticeMax = 0;
 		while (gradoVertice.hasNext()) {
 			gradoVertice.next();
 			gradoVerticeMax++;
 		}
+
 		Vertex<DecoratedElementCoeficient> personajeaux;
 
 		Iterator<Vertex<DecoratedElementCoeficient>> itAux;
@@ -104,20 +109,24 @@ public class DecoratedElementCoeficient<T> implements Element {
 			while (it.hasNext()) {
 				it.next();
 				gradoCadaVertice++;
+
 			}
-			if (gradoCadaVertice== gradoVerticeMax) {
-				if(!(personajeaux.equals(personajeMasSociable))) {
+
+			if (gradoCadaVertice == gradoVerticeMax) {
+				if (!(personajeaux.equals(personajeMasSociable))) {
 					personajesMasSociables.add(personajeaux.getElement());
 				}
 
 			}
+			gradoCadaVertice = 0;
 		}
 		return personajesMasSociables;
-		
+
 	}
+
 	public static Vertex<DecoratedElementCoeficient> masSociable(TreeMapGraph g) {
-		int gradoVertice = 0;
-		int aux = 0;
+		int gradoCadaVertice = 0;
+		int gradoVerticeMax = 0;
 		Vertex<DecoratedElementCoeficient> personaje = null, personajeaux;
 		Iterator<Vertex<DecoratedElementCoeficient>> itAux;
 		itAux = g.getVertices();
@@ -127,26 +136,29 @@ public class DecoratedElementCoeficient<T> implements Element {
 
 			while (it.hasNext()) {
 				it.next();
-				gradoVertice++;
+				gradoCadaVertice++;
 			}
-			if (gradoVertice > aux) {
-				aux = gradoVertice;
-				gradoVertice = 0;
+
+			if (gradoCadaVertice > gradoVerticeMax) {
+
+				gradoVerticeMax = gradoCadaVertice;
+
 				personaje = personajeaux;
 
 			}
+			gradoCadaVertice = 0;
+
 		}
 
 		return personaje;
 	}
 
-	
-	public static ArrayList menosSociables(TreeMapGraph g,Vertex<DecoratedElementCoeficient> personajeMenosSociable){
+	public static ArrayList menosSociables(TreeMapGraph g, Vertex<DecoratedElementCoeficient> personajeMenosSociable) {
 		ArrayList personajesMenosSociables = new ArrayList();
 		personajesMenosSociables.add(personajeMenosSociable.getElement());
-		Iterator gradoVertice =g.incidentEdges(personajeMenosSociable);
-		int gradoCadaVertice=0;
-		int gradoVerticeMin=0;
+		Iterator gradoVertice = g.incidentEdges(personajeMenosSociable);
+		int gradoCadaVertice = 0;
+		int gradoVerticeMin = 0;
 		while (gradoVertice.hasNext()) {
 			gradoVertice.next();
 			gradoVerticeMin++;
@@ -163,17 +175,18 @@ public class DecoratedElementCoeficient<T> implements Element {
 				it.next();
 				gradoCadaVertice++;
 			}
-			if (gradoCadaVertice== gradoVerticeMin) {
-				if(!(personajeaux.equals(personajeMenosSociable))) {
+			if (gradoCadaVertice == gradoVerticeMin) {
+				if (!(personajeaux.equals(personajeMenosSociable))) {
 					personajesMenosSociables.add(personajeaux.getElement());
 				}
 
 			}
+			gradoCadaVertice = 0;
 		}
 		return personajesMenosSociables;
-		
+
 	}
-	
+
 	public static Vertex<DecoratedElementCoeficient> menosSociable(TreeMapGraph g) {
 		int l = 0;
 		int aux = 10000;
@@ -197,6 +210,46 @@ public class DecoratedElementCoeficient<T> implements Element {
 		}
 
 		return personaje;
+	}
+
+	public static Iterator ordenacionMayorPesos(TreeMapGraph g, Vertex<DecoratedElementCoeficient> u) {
+		ArrayList aristas = new ArrayList();
+		Iterator<Edge> it;
+		it = g.incidentEdges(u);
+
+		while (it.hasNext()) {
+
+			aristas.add(it.next());
+		}
+		Collections.sort(aristas, new Comparator<Edge>() {
+
+			@Override
+			public int compare(Edge o1, Edge o2) {
+				return new Integer((int) o2.getElement()).compareTo((int) o1.getElement());
+			}
+
+		});
+		return aristas.iterator();
+	}
+
+	public static Iterator ordenacionMenorPesos(TreeMapGraph g, Vertex<DecoratedElementCoeficient> u) {
+		ArrayList aristas = new ArrayList();
+		Iterator<Edge> it;
+		it = g.incidentEdges(u);
+
+		while (it.hasNext()) {
+
+			aristas.add(it.next());
+		}
+		Collections.sort(aristas, new Comparator<Edge>() {
+
+			@Override
+			public int compare(Edge o1, Edge o2) {
+				return new Integer((int) o1.getElement()).compareTo((int) o2.getElement());
+			}
+
+		});
+		return aristas.iterator();
 	}
 
 	public static int pathBFS(TreeMapGraph g, Vertex<DecoratedElementCoeficient> s,
@@ -246,8 +299,10 @@ public class DecoratedElementCoeficient<T> implements Element {
 			while (!(z.getParent() == null)) {
 				secuencia.add(z);
 				z = z.getParent();
+
 			}
 			secuencia.add(s.getElement());
+
 			l = t.getElement().getDistance();
 		} else {
 			l = -1;
@@ -255,68 +310,42 @@ public class DecoratedElementCoeficient<T> implements Element {
 		return l;
 
 	}
-	public static Iterator ordenacionMayorPesos(TreeMapGraph g, Vertex<DecoratedElementCoeficient> u) {
-		ArrayList aristas = new ArrayList();
-		Iterator<Edge> it;
-		it = g.incidentEdges(u);
 
-		while (it.hasNext()) {
-
-			aristas.add(it.next());
+	public static void resetGraph(TreeMapGraph g) {
+		Iterator<Vertex<DecoratedElementCoeficient>> itAux;
+		itAux = g.getVertices();
+		DecoratedElementCoeficient el;
+		while (itAux.hasNext()) {
+			el = itAux.next().getElement();
+			el.setVisited(false);
+			el.setDistance(0);
 		}
-		Collections.sort(aristas, new Comparator<Edge>() {
 
-			@Override
-			public int compare(Edge o1, Edge o2) {
-				return new Integer((int) o2.getElement()).compareTo((int) o1.getElement());
-			}
-
-		});
-		return aristas.iterator();
-	}
-	public static Iterator ordenacionMenorPesos(TreeMapGraph g, Vertex<DecoratedElementCoeficient> u) {
-		ArrayList aristas = new ArrayList();
-		Iterator<Edge> it;
-		it = g.incidentEdges(u);
-
-		while (it.hasNext()) {
-
-			aristas.add(it.next());
-		}
-		Collections.sort(aristas, new Comparator<Edge>() {
-
-			@Override
-			public int compare(Edge o1, Edge o2) {
-				return new Integer((int) o1.getElement()).compareTo((int) o2.getElement());
-			}
-
-		});
-		return aristas.iterator();
 	}
 
 	public static int pathDFS(TreeMapGraph g, Vertex<DecoratedElementCoeficient> v,
 			Vertex<DecoratedElementCoeficient> z) {
-		
-		Queue<Vertex<DecoratedElementCoeficient>> queue = new LinkedList();
-		  boolean noEnd=true;
-		
-		  Vertex<DecoratedElementCoeficient> u,w;
 
-			DecoratedElementCoeficient el;
-			Edge e;
-			Iterator<Edge> it;
-			int l = 0;
-			Iterator<Vertex<DecoratedElementCoeficient>> itAux;
-			itAux = g.getVertices();
-			while (itAux.hasNext()) {
-				el = itAux.next().getElement();
-				el.setVisited(false);
-				el.setDistance(0);
-			}
-			v.getElement().setVisited(true);
-			queue.offer(v);
-			while (!queue.isEmpty() && noEnd) {
-			u=queue.poll();
+		Queue<Vertex<DecoratedElementCoeficient>> queue = new LinkedList();
+		boolean noEnd = true;
+
+		Vertex<DecoratedElementCoeficient> u, w;
+
+		DecoratedElementCoeficient el;
+		Edge e;
+		Iterator<Edge> it;
+		int l = 0;
+		Iterator<Vertex<DecoratedElementCoeficient>> itAux;
+		itAux = g.getVertices();
+		while (itAux.hasNext()) {
+			el = itAux.next().getElement();
+			el.setVisited(false);
+			el.setDistance(0);
+		}
+		v.getElement().setVisited(true);
+		queue.offer(v);
+		while (!queue.isEmpty() && noEnd) {
+			u = queue.poll();
 			it = ordenacionMenorPesos(g, u);
 			while (it.hasNext() && noEnd) {
 
@@ -325,23 +354,23 @@ public class DecoratedElementCoeficient<T> implements Element {
 				v = g.opposite(u, e);
 				if (!(v.getElement()).isVisited()) {
 					(v.getElement()).setVisited(true);
-					
+
 					(v.getElement()).setDistance(((u.getElement()).getDistance()) + 1);
 					(v.getElement()).setParent(u.getElement());
 					queue.offer(v);
 					noEnd = !(v.getElement().equals(z.getElement()));
 					System.out.println(v.getElement());
+				}
+
 			}
-			
+		}
+		if (!noEnd) {
+			l = z.getElement().getDistance();
+		} else {
+			l = -1;
+		}
+		return l;
 	}
-	}
-			if (!noEnd) {
-				l = z.getElement().getDistance();
-			} else {
-				l = -1;
-			}
-			return l;
-	}		
 	/*
 	 * Vertex<DecoratedElementCoeficient> u=null; Edge e=null; // Previsit.
 	 * Optional: Do something with the node
@@ -355,5 +384,69 @@ public class DecoratedElementCoeficient<T> implements Element {
 	 * *
 	 */
 
+	public static boolean pathDFS(TreeMapGraph g, Vertex<DecoratedElementCoeficient> v,
+			Vertex<DecoratedElementCoeficient> u, Queue cola,boolean find) {
+		
+		cola.add(v); // Encolamos el nodo v
+		Edge e = null;
+		Stack pila = new Stack();
+		int num, numMin = 100;
+		Vertex<DecoratedElementCoeficient> w,z;
+		v.getElement().setVisited(true); // Le marcamos como visitado
+		Iterator<Edge> it = ordenacionMenorPesos(g, v);
+		;
+		while (it.hasNext() && !find) { // Mientras haya aristas
+			e = it.next();
+			pila.push(e); // Guardamos la arista en la pila
+		}
+		while (!pila.isEmpty() && !find) { // Mientras haya elementos en la pila
+			e = (Edge) pila.pop(); // Sacamos el top de la pila, y lo guardamos en e
+			w = g.opposite(v, e); // Cogemos el vertice opuesto de v de la arista f
 
+			if (w.getElement().equals(u.getElement())) { // Si el nodo no esta visitado, y no es el nodo a encontrar
+			 System.out.println("\n"+w.getElement().getParent()+"\n");
+
+				find = true;
+			} else if (!(w.getElement().isVisited() && !(w.getElement().equals(u.getElement())))) { // Si encontramos
+																									// camino, ponemos
+																									// find a true
+
+				(w.getElement()).setParent(u.getElement());
+
+				
+				find = pathDFS(g, w, u, cola,find); // Llamada recursiva
+			}
+
+		}
+
+		return find; // Devolvemos el booleano find
+
+	}
+
+	
+	/*En el main
+	 * boolean find = DFS(gr, v, u, cola);
+
+		if (find) { // si find es igual a true hemos encontrado el camino entre los dos personajes
+					// proporcionados
+			cola.enqueue(u);
+			System.out.println();
+			Vertex<Character> w;
+			System.out.println("Camino: ");
+			while (!cola.isEmpty()) { // mientras la cola tenga elementos
+				w = (Vertex<Character>) cola.dequeue(); // Desencolamos los elementos
+				if (cola.isEmpty()) {
+					System.out.print(w.getElement().getElement()); // Imprimimos el ultimo elemento
+				} else {
+					System.out.print(w.getElement().getElement() + " - "); // Imprimimos los elementos
+				}
+			}
+
+		} else { // si find es false no hemos encontrado camino
+			System.out.println("No hay camino");
+
+		}
+	 * 
+	 */
+	 
 }
