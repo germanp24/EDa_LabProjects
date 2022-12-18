@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.UUID;
@@ -33,6 +34,8 @@ public class Main {
 		Vertex<DecoratedElementCoeficient> V2;
 		Scanner read = new Scanner(System.in);
 		Scanner sc = new Scanner(new File("C:\\Users\\Victo\\git\\EDA\\edNoLineales\\marvel-unimodal-edges.csv"));
+		// Es posible que para la entrega haya que modificar la ruta de la linea anterior (?)
+		
 		sc.nextLine();
 		boolean nombre = false;
 		while (sc.hasNextLine()) {
@@ -95,14 +98,16 @@ public class Main {
 				System.out.println(" Has seleccionado la opcion 1: Información del grafo");
 				System.out.println("El número de personajes del grafo es: "+Grafo.getN());
 				System.out.println("El número de relaciones entre personajes es de: "+ Grafo.getM());
-				System.out.println("El/Los personaje/s más sociable/s es: " +DecoratedElementCoeficient.masSociable(Grafo).getID());
-				System.out.println("El/Los personaje/s menos sociable/s es: "+DecoratedElementCoeficient.menosSociable(Grafo).getID());
+				
+				
+				System.out.println("El/Los personaje/s más sociable/s es: " +DecoratedElementCoeficient.masSociables(Grafo,DecoratedElementCoeficient.masSociable(Grafo)));
+				System.out.println("El/Los personaje/s menos sociable/s es: "+DecoratedElementCoeficient.menosSociables(Grafo,DecoratedElementCoeficient.menosSociable(Grafo)));
 				System.out.print("Introduce que operación deseas realizar:");
 
 				casos = read.nextInt();
 				break;
 			case 2:
-				Stack<Edge> p = new Stack();
+				Stack<Vertex<DecoratedElementCoeficient>> stack = new Stack();
 				System.out.println(" Has seleccionado la opcion 2: Recorrido con DFS");
 				System.out.println("Escribe el nombre del primer personaje");
 				p1 = br.readLine();
@@ -114,12 +119,13 @@ public class Main {
 
 				P2 = new DecoratedElementCoeficient(p2);
 				V2 = Grafo.getVertex(P2.getID());
-				System.out.println( DecoratedElementCoeficient.pathDFS(Grafo, V1, V2,p));
+				System.out.println( DecoratedElementCoeficient.pathDFS(Grafo, V1,V2));
 				System.out.print("Introduce que operación deseas realizar:");
 
 				casos = read.nextInt();
 				break;
 			case 3:
+				ArrayList secuencia = new ArrayList();
 				System.out.println("Has seleccionado la opcion 3: Recorrido con BFS");
 				System.out.println("Escribe el nombre del primer personaje");
 				p1 = br.readLine();
@@ -131,7 +137,14 @@ public class Main {
 
 				P2 = new DecoratedElementCoeficient(p2);
 				V2 = Grafo.getVertex(P2.getID());
-				System.out.println("La distancia entre " + p1 + " y " + p2 + " es de: " + DecoratedElementCoeficient.pathBFS(Grafo, V1, V2));
+				int resultado=DecoratedElementCoeficient.pathBFS(Grafo, V1, V2,secuencia);
+				if(resultado==-1) {
+					System.out.println("No existe relacion entre " +p1 +  " y " + p2);
+				}else {
+				System.out.println("La distancia entre " + p1 + " y " + p2 + " es de: " +resultado+"\n");
+				
+				System.out.println("Y la secuencia entre los personajes es: "+secuencia);
+				}
 				System.out.print("Introduce que operación deseas realizar:");
 				casos = read.nextInt();
 				break;
