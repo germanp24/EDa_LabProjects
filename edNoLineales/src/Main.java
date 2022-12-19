@@ -94,12 +94,12 @@ public class Main {
 		while (casos > 0) {
 			switch (casos) {
 			case 1:
-				System.out.println(" Has seleccionado la opcion 1: Información del grafo");
-				System.out.println("El número de personajes del grafo es: "+Grafo.getN());
-				System.out.println("El número de relaciones entre personajes es de: "+ Grafo.getM());
+				System.out.println(" Has seleccionado la opcion 1: Informacion del grafo");
+				System.out.println("El numero de personajes del grafo es: "+Grafo.getN());
+				System.out.println("El numero de relaciones entre personajes es de: "+ Grafo.getM());
 				
 				
-				System.out.println("El/Los personaje/s más sociable/s es: " +DecoratedElementCoeficient.masSociables(Grafo,DecoratedElementCoeficient.masSociable(Grafo)));
+				System.out.println("El/Los personaje/s mas sociable/s es: " +DecoratedElementCoeficient.masSociables(Grafo,DecoratedElementCoeficient.masSociable(Grafo)));
 				System.out.println("El/Los personaje/s menos sociable/s es: "+DecoratedElementCoeficient.menosSociables(Grafo,DecoratedElementCoeficient.menosSociable(Grafo)));
 				System.out.println();
 				casos = menu();
@@ -175,14 +175,19 @@ public class Main {
 				System.exit(0);
 			default:
 				// falta resolver excepcion para que el programa continue y nos vuelva a pedir
-				// introducir numero de operación
+				// introducir numero de operacion
 				
 			}
 		}
-
 	}
+	
+/**
+ * It prints out a menu of options for the user to choose from
+ * 
+ * @return The method menu() is returning the value of the variable opcion.
+ */
 	public static int menu() {
-		System.out.print("Introduce que operación deseas realizar:\n");
+		System.out.print("Introduce que operacion deseas realizar:\n");
 		System.out.println(" 1.Info del grafo");
 		System.out.println(" 2. Recorrer el grafo con el camino DFS");
 		System.out.println(" 3. Recorrer el grafo con el camino BFS");
