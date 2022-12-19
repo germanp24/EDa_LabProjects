@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
-import ed_noLineales2020_21.Character;
-import graphsDSESIUCLM.source.Vertex;
+
 
 /**
  * It's a class that implements the Element interface and it's used to decorate
@@ -385,36 +384,42 @@ public class DecoratedElementCoeficient<T> implements Element {
 	 */
 
 	public static boolean pathDFS(TreeMapGraph g, Vertex<DecoratedElementCoeficient> v,
-			Vertex<DecoratedElementCoeficient> u, Queue cola,boolean find) {
-		
-		cola.add(v); // Encolamos el nodo v
+			Vertex<DecoratedElementCoeficient> u, Queue cola,boolean find,int numCadaRecorrido) {
+		cola.offer(v); // Encolamos el nodo v
 		Edge e = null;
-		Stack pila = new Stack();
-		int num, numMin = 100;
-		Vertex<DecoratedElementCoeficient> w,z;
+		Stack<Edge> pila = new Stack();
+		int numMin = numCadaRecorrido;
+		numCadaRecorrido=0;
+		Vertex<DecoratedElementCoeficient> w;
 		v.getElement().setVisited(true); // Le marcamos como visitado
-		Iterator<Edge> it = ordenacionMenorPesos(g, v);
-		;
-		while (it.hasNext() && !find) { // Mientras haya aristas
+		Iterator<Edge> it = ordenacionMayorPesos(g, v);
+		
+		while (it.hasNext()) { // Mientras haya aristas
 			e = it.next();
-			pila.push(e); // Guardamos la arista en la pila
+			pila.push(e);
+			// Guardamos la arista en la pila
 		}
-		while (!pila.isEmpty() && !find) { // Mientras haya elementos en la pila
-			e = (Edge) pila.pop(); // Sacamos el top de la pila, y lo guardamos en e
+		while (!pila.isEmpty()) {
+			// Mientras haya elementos en la pila
+			e =  pila.pop(); // Sacamos el top de la pila, y lo guardamos en e
 			w = g.opposite(v, e); // Cogemos el vertice opuesto de v de la arista f
-
+			
 			if (w.getElement().equals(u.getElement())) { // Si el nodo no esta visitado, y no es el nodo a encontrar
-			 System.out.println("\n"+w.getElement().getParent()+"\n");
-
-				find = true;
-			} else if (!(w.getElement().isVisited() && !(w.getElement().equals(u.getElement())))) { // Si encontramos
-																									// camino, ponemos
-																									// find a true
-
-				(w.getElement()).setParent(u.getElement());
+				System.out.println("\n"+w.getElement()+" - "+numCadaRecorrido+"\n");
+				find=true;
 
 				
-				find = pathDFS(g, w, u, cola,find); // Llamada recursiva
+			} else if (!(w.getElement().isVisited() && !(w.getElement().equals(u.getElement()))) ) { // Si encontramos
+				(w.getElement()).setDistance(((u.getElement()).getDistance()) + 1);
+								// camino, ponemos
+				(w.getElement()).setParent(u.getElement());
+				System.out.println(w.getElement()+" - "+(int)e.getElement());
+				numCadaRecorrido= numCadaRecorrido +(int)e.getElement();
+				
+				
+
+				
+				find = pathDFS(g, w, u, cola,find,numCadaRecorrido); // Llamada recursiva
 			}
 
 		}
@@ -424,29 +429,6 @@ public class DecoratedElementCoeficient<T> implements Element {
 	}
 
 	
-	/*En el main
-	 * boolean find = DFS(gr, v, u, cola);
-
-		if (find) { // si find es igual a true hemos encontrado el camino entre los dos personajes
-					// proporcionados
-			cola.enqueue(u);
-			System.out.println();
-			Vertex<Character> w;
-			System.out.println("Camino: ");
-			while (!cola.isEmpty()) { // mientras la cola tenga elementos
-				w = (Vertex<Character>) cola.dequeue(); // Desencolamos los elementos
-				if (cola.isEmpty()) {
-					System.out.print(w.getElement().getElement()); // Imprimimos el ultimo elemento
-				} else {
-					System.out.print(w.getElement().getElement() + " - "); // Imprimimos los elementos
-				}
-			}
-
-		} else { // si find es false no hemos encontrado camino
-			System.out.println("No hay camino");
-
-		}
-	 * 
-	 */
+	
 	 
 }

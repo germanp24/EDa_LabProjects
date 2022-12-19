@@ -30,14 +30,13 @@ public class Main {
 
 		String p1 = null, p2 = null;
 		int peso = 0;
-		int key = 0;
 		DecoratedElementCoeficient<String> P1;
 		DecoratedElementCoeficient<String> P2;
 		Vertex<DecoratedElementCoeficient> V1;
 		Vertex<DecoratedElementCoeficient> V2;
 		Scanner read = new Scanner(System.in);
 		
-		Scanner sc = new Scanner(new File("C:\\Users\\victo\\eclipse-workspace\\Ed_NoLineales\\src\\ed_noLineales2020_21\\stormofswords.csv"));//C:\\Users\\Victo\\git\\EDA\\edNoLineales\\marvel-unimodal-edges.csv
+		Scanner sc = new Scanner(new File("C:\\Users\\Victo\\git\\EDA\\edNoLineales\\marvel-unimodal-edges.csv"));//C:\\Users\\Victo\\git\\EDA\\edNoLineales\\marvel-unimodal-edges.csv
 		// Es posible que para la entrega haya que modificar la ruta de la linea anterior (?)
 		
 		sc.nextLine();
@@ -112,6 +111,7 @@ public class Main {
 				break;
 			case 2:
 				Stack<Vertex<DecoratedElementCoeficient>> stack = new Stack();
+				DecoratedElementCoeficient.resetGraph(Grafo);
 				System.out.println(" Has seleccionado la opcion 2: Recorrido con DFS");
 				System.out.println("Escribe el nombre del primer personaje");
 				p1 = br.readLine();
@@ -123,10 +123,31 @@ public class Main {
 
 				P2 = new DecoratedElementCoeficient(p2);
 				V2 = Grafo.getVertex(P2.getID());
-				DecoratedElementCoeficient.resetGraph(Grafo);
+				
 				Queue cola= new LinkedList();
 			
-				System.out.println( DecoratedElementCoeficient.pathDFS(Grafo, V1,V2,cola,false));
+				//System.out.println( DecoratedElementCoeficient.pathDFS(Grafo, V1,V2,cola,false));
+				boolean find =DecoratedElementCoeficient.pathDFS(Grafo, V1, V2, cola,false,100000);
+
+				if (find) { // si find es igual a true hemos encontrado el camino entre los dos personajes
+							// proporcionados
+					cola.add(V2);
+					System.out.println();
+					Vertex<Character> w;
+					System.out.println("Camino: ");
+					while (!cola.isEmpty()) { // mientras la cola tenga elementos
+						w = (Vertex<Character>) cola.poll(); // Desencolamos los elementos
+						if (cola.isEmpty()) {
+							System.out.print(w.getElement()); // Imprimimos el ultimo elemento
+						} else {
+							System.out.print(w.getElement() + " - "); // Imprimimos los elementos
+						}
+					}
+
+				} else { // si find es false no hemos encontrado camino
+					System.out.println("No hay camino");
+
+				}
 				System.out.print("Introduce que operación deseas realizar:");
 
 				casos = read.nextInt();
