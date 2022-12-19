@@ -1,14 +1,10 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
-
-
 
 /**
  * It's a class that implements the Element interface and it's used to decorate
@@ -254,7 +250,8 @@ public class DecoratedElementCoeficient<T> implements Element {
 	public static int pathBFS(TreeMapGraph g, Vertex<DecoratedElementCoeficient> s,
 			Vertex<DecoratedElementCoeficient> t, ArrayList secuencia) {
 		Queue<Vertex<DecoratedElementCoeficient>> q = new LinkedList();
-
+		int pesoMin=100000;
+		int pesoCadaRecorrido=0;
 		boolean noEnd = true;
 		Vertex<DecoratedElementCoeficient> u, v;
 
@@ -280,13 +277,15 @@ public class DecoratedElementCoeficient<T> implements Element {
 			while (itaux.hasNext() && noEnd) {
 
 				e = itaux.next();
-
+				
 				v = g.opposite(u, e);
-
+				
 				if (!(v.getElement()).isVisited()) {
 					(v.getElement()).setVisited(true);
 					(v.getElement()).setDistance(((u.getElement()).getDistance()) + 1);
 					(v.getElement()).setParent(u.getElement());
+					
+					
 					q.offer(v);
 
 					noEnd = !(v.getElement().equals(t.getElement()));
@@ -322,113 +321,46 @@ public class DecoratedElementCoeficient<T> implements Element {
 
 	}
 
-	public static int pathDFS(TreeMapGraph g, Vertex<DecoratedElementCoeficient> v,
-			Vertex<DecoratedElementCoeficient> z) {
-
-		Queue<Vertex<DecoratedElementCoeficient>> queue = new LinkedList();
-		boolean noEnd = true;
-
-		Vertex<DecoratedElementCoeficient> u, w;
-
-		DecoratedElementCoeficient el;
-		Edge e;
-		Iterator<Edge> it;
-		int l = 0;
-		Iterator<Vertex<DecoratedElementCoeficient>> itAux;
-		itAux = g.getVertices();
-		while (itAux.hasNext()) {
-			el = itAux.next().getElement();
-			el.setVisited(false);
-			el.setDistance(0);
-		}
-		v.getElement().setVisited(true);
-		queue.offer(v);
-		while (!queue.isEmpty() && noEnd) {
-			u = queue.poll();
-			it = ordenacionMenorPesos(g, u);
-			while (it.hasNext() && noEnd) {
-
-				e = it.next();
-
-				v = g.opposite(u, e);
-				if (!(v.getElement()).isVisited()) {
-					(v.getElement()).setVisited(true);
-
-					(v.getElement()).setDistance(((u.getElement()).getDistance()) + 1);
-					(v.getElement()).setParent(u.getElement());
-					queue.offer(v);
-					noEnd = !(v.getElement().equals(z.getElement()));
-					System.out.println(v.getElement());
-				}
-
-			}
-		}
-		if (!noEnd) {
-			l = z.getElement().getDistance();
-		} else {
-			l = -1;
-		}
-		return l;
-	}
-	/*
-	 * Vertex<DecoratedElementCoeficient> u=null; Edge e=null; // Previsit.
-	 * Optional: Do something with the node
-	 * 
-	 * Iterator<Edge>it = g.incidentEdges(s); while (it.hasNext()){ //using the
-	 * edges to recover e=it.next(); //the adjacent vertices u=g.opposite(s, e);
-	 * if(!u.getElement().isVisited()){
-	 * u.getElement().setParent(s.getElement());//Optional pathDFS(g, s, t); } } //
-	 * Postvisit. Optional: Do something with the node
-	 * 
-	 * *
-	 */
-
+	
 	public static boolean pathDFS(TreeMapGraph g, Vertex<DecoratedElementCoeficient> v,
-			Vertex<DecoratedElementCoeficient> u, Queue cola,boolean find,int numCadaRecorrido) {
-		cola.offer(v); // Encolamos el nodo v
+			Vertex<DecoratedElementCoeficient> u, Queue cola,boolean find) {
+		cola.offer(v);
 		Edge e = null;
 		Stack<Edge> pila = new Stack();
-		int numMin = numCadaRecorrido;
-		numCadaRecorrido=0;
 		Vertex<DecoratedElementCoeficient> w;
-		v.getElement().setVisited(true); // Le marcamos como visitado
+		v.getElement().setVisited(true); 
 		Iterator<Edge> it = ordenacionMayorPesos(g, v);
 		
-		while (it.hasNext()) { // Mientras haya aristas
+		while (it.hasNext()) { 
 			e = it.next();
+			if((int)e.getElement()<=10) {
 			pila.push(e);
-			// Guardamos la arista en la pila
-		}
-		while (!pila.isEmpty()) {
-			// Mientras haya elementos en la pila
-			e =  pila.pop(); // Sacamos el top de la pila, y lo guardamos en e
-			w = g.opposite(v, e); // Cogemos el vertice opuesto de v de la arista f
-			
-			if (w.getElement().equals(u.getElement())) { // Si el nodo no esta visitado, y no es el nodo a encontrar
-				System.out.println("\n"+w.getElement()+" - "+numCadaRecorrido+"\n");
-				find=true;
-
-				
-			} else if (!(w.getElement().isVisited() && !(w.getElement().equals(u.getElement()))) ) { // Si encontramos
-				(w.getElement()).setDistance(((u.getElement()).getDistance()) + 1);
-								// camino, ponemos
-				(w.getElement()).setParent(u.getElement());
-				System.out.println(w.getElement()+" - "+(int)e.getElement());
-				numCadaRecorrido= numCadaRecorrido +(int)e.getElement();
-				
-				
-
-				
-				find = pathDFS(g, w, u, cola,find,numCadaRecorrido); // Llamada recursiva
 			}
-
 		}
-
-		return find; // Devolvemos el booleano find
+		while (!pila.isEmpty() && !find) {
+			e =  pila.pop(); 
+			w = g.opposite(v,e); 
+			
+			if (g.areAdjacent(v, u)) { 
+				
+				find=true;
+			}else if(w.getElement().equals(u.getElement())){
+				
+				 find=true;
+				 
+			} else if (!(w.getElement().isVisited() && !(w.getElement().equals(u.getElement()))) ) {
+			
+				
+				find = pathDFS(g, w, u, cola,find); 
+			
+		}
+		
+	
 
 	}
-
 	
+		return find; 
 	
 	 
+}
 }

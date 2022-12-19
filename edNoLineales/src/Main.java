@@ -24,6 +24,7 @@ import java.util.UUID;
 
 public class Main {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static Scanner read = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException {
 		TreeMapGraph Grafo = new TreeMapGraph();
@@ -34,9 +35,8 @@ public class Main {
 		DecoratedElementCoeficient<String> P2;
 		Vertex<DecoratedElementCoeficient> V1;
 		Vertex<DecoratedElementCoeficient> V2;
-		Scanner read = new Scanner(System.in);
 		
-		Scanner sc = new Scanner(new File("C:\\Users\\Victo\\git\\EDA\\edNoLineales\\marvel-unimodal-edges.csv"));//C:\\Users\\Victo\\git\\EDA\\edNoLineales\\marvel-unimodal-edges.csv
+		Scanner sc = new Scanner(new File("C:\\Users\\Victo\\git\\EDA\\edNoLineales\\marvel-unimodal-edges.csv"));
 		// Es posible que para la entrega haya que modificar la ruta de la linea anterior (?)
 		
 		sc.nextLine();
@@ -88,13 +88,9 @@ public class Main {
 
 		sc.close();
 
-		System.out.print("Introduce que operación deseas realizar:\n");
-		System.out.println(" 1.Info del grafo");
-		System.out.println(" 2. Recorrer el grafo con el camino DFS");
-		System.out.println(" 3. Recorrer el grafo con el camino BFS");
-		System.out.println(" 4.Salir");
+		
 
-		int casos = read.nextInt();
+		int casos = menu();
 		while (casos > 0) {
 			switch (casos) {
 			case 1:
@@ -105,9 +101,8 @@ public class Main {
 				
 				System.out.println("El/Los personaje/s más sociable/s es: " +DecoratedElementCoeficient.masSociables(Grafo,DecoratedElementCoeficient.masSociable(Grafo)));
 				System.out.println("El/Los personaje/s menos sociable/s es: "+DecoratedElementCoeficient.menosSociables(Grafo,DecoratedElementCoeficient.menosSociable(Grafo)));
-				System.out.print("Introduce que operación deseas realizar:");
-
-				casos = read.nextInt();
+				System.out.println();
+				casos = menu();
 				break;
 			case 2:
 				Stack<Vertex<DecoratedElementCoeficient>> stack = new Stack();
@@ -126,31 +121,30 @@ public class Main {
 				
 				Queue cola= new LinkedList();
 			
-				//System.out.println( DecoratedElementCoeficient.pathDFS(Grafo, V1,V2,cola,false));
-				boolean find =DecoratedElementCoeficient.pathDFS(Grafo, V1, V2, cola,false,100000);
+				
+				boolean find =DecoratedElementCoeficient.pathDFS(Grafo, V1, V2, cola,false);
 
-				if (find) { // si find es igual a true hemos encontrado el camino entre los dos personajes
-							// proporcionados
+				if (find) { 
 					cola.add(V2);
 					System.out.println();
-					Vertex<Character> w;
+					Vertex<DecoratedElementCoeficient> w;
 					System.out.println("Camino: ");
-					while (!cola.isEmpty()) { // mientras la cola tenga elementos
-						w = (Vertex<Character>) cola.poll(); // Desencolamos los elementos
+					while (!cola.isEmpty()) { 
+						w = (Vertex<DecoratedElementCoeficient>) cola.poll(); 
 						if (cola.isEmpty()) {
-							System.out.print(w.getElement()); // Imprimimos el ultimo elemento
+							System.out.print(w.getElement()); 
 						} else {
-							System.out.print(w.getElement() + " - "); // Imprimimos los elementos
+							System.out.print(w.getElement() + " - ");
 						}
 					}
 
-				} else { // si find es false no hemos encontrado camino
+				} else { 
 					System.out.println("No hay camino");
 
 				}
-				System.out.print("Introduce que operación deseas realizar:");
+				System.out.println();
 
-				casos = read.nextInt();
+				casos = menu();
 				break;
 			case 3:
 				ArrayList secuencia = new ArrayList();
@@ -174,24 +168,26 @@ public class Main {
 				Collections.reverse(secuencia);
 				System.out.println("Y la secuencia entre los personajes es: " +secuencia);
 				}
-				System.out.print("Introduce que operación deseas realizar:");
-				casos = read.nextInt();
+				System.out.println();
+				casos = menu();
 				break;
 			case 4:
 				System.exit(0);
 			default:
 				// falta resolver excepcion para que el programa continue y nos vuelva a pedir
 				// introducir numero de operación
-				System.out.println("Error, por favor seleccione una de las opciones válidas.");
-				System.out.print("Introduce que operación deseas realizar:");
-				System.out.println(" 1.Info del grafo");
-				System.out.println(" 2. Recorrer el grafo con el camino DFS");
-				System.out.println(" 3. Recorrer el grafo con el camino BFS");
-				System.out.println(" 4. Salir");
-				casos = read.nextInt();
+				
 			}
 		}
 
+	}
+	public static int menu() {
+		System.out.print("Introduce que operación deseas realizar:\n");
+		System.out.println(" 1.Info del grafo");
+		System.out.println(" 2. Recorrer el grafo con el camino DFS");
+		System.out.println(" 3. Recorrer el grafo con el camino BFS");
+		System.out.println(" 4. Salir");
+		return read.nextInt();
 	}
 
 }
