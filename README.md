@@ -1,3 +1,3 @@
-# EDa_Activity1
+# EDa Lab Projects
 
 Repo for EDa Lab Projects.
